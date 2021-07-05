@@ -2,16 +2,16 @@ import React, { useCallback, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
-import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
+import SignInFormState from "@screens/Unprotected/SignInScreen/SignInView/SignInForm/SignInFormState";
 import {
   ForgotPasswordRoute,
   SignInRoute,
   SignUpRoute,
 } from "@screens/Unprotected/routes";
+import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
 import resetNavigation from "@utils/navigation/resetNavigation";
 
 import SignInView from "./SignInView";
-import SignInFormState from "@screens/Unprotected/SignInScreen/SignInView/SignInForm/SignInFormState";
 
 type SignInNavigationProp = StackNavigationProp<
   UnprotectedNavigatorParams,

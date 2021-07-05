@@ -28,9 +28,8 @@
     "exclude": [
       "./node_modules/react-hook-form/dist/*.d.ts",
       "./node_modules/@types/**/*.d.ts",
-      "./node_modules/@react-native-firebase/**/*.d.ts",
       "./node_modules/react-native-paper/**/*.d.ts",
-      "./app/**/*.test.{ts,tsx}"
+      "./src/**/*.test.{ts,tsx}"
     ]
   }
 }

@@ -1,1 +1,1 @@
-export default 'IconMock';
+export default "IconMock";

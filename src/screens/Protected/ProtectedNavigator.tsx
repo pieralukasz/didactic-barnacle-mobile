@@ -10,6 +10,7 @@ import { RouteProp } from "@react-navigation/native";
 import useUserContext from "@features/User/useUserContext";
 
 import { MainNavigatorParams } from "@screens/MainNavigatorParams";
+import { testProtectedRoute } from "@screens/Protected/routes";
 import { ProtectedRoute, UnprotectedRoute } from "@screens/routes";
 
 import { ProtectedNavigatorParams } from "./ProtectedNavigatorParams";
@@ -51,7 +52,7 @@ const ProtectedNavigator: React.FC<ProtectedNavigatorProps> = ({
 
   return (
     <Stack.Navigator initialRouteName={ProtectedRoute}>
-      <Stack.Screen name={ProtectedRoute} component={View} />
+      <Stack.Screen name={testProtectedRoute} component={View} />
     </Stack.Navigator>
   );
 };
