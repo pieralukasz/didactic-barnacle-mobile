@@ -1,0 +1,117 @@
+{
+  "name": "mobile",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.js",
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "link": "react-native link",
+    "test": "jest --silent --testEnvironment jsdom --timers fake --coverage",
+    "prettier": "npx prettier --write \"app/**/*.{ts,tsx,js}\"",
+    "prettier-check": "npx prettier-check \"app/**/*.{ts,tsx,js}\"",
+    "lint": "eslint --ext .ts,.tsx src --color",
+    "types-check": "npx tsc --project . --noEmit --pretty --skipLibCheck"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.20",
+    "@aws-amplify/core": "^4.1.1",
+    "@hookform/resolvers": "^2.6.0",
+    "@react-native-async-storage/async-storage": "^1.15.5",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/netinfo": "^6.0.0",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.5",
+    "amazon-cognito-identity-js": "^5.0.3",
+    "aws-amplify": "^4.1.1",
+    "aws-appsync-auth-link": "^3.0.4",
+    "aws-appsync-subscription-link": "^3.0.6",
+    "expo-secure-store": "^10.1.0",
+    "react": "17.0.1",
+    "react-hook-form": "^7.5.2",
+    "react-native": "0.64.1",
+    "react-native-config": "^1.4.2",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-paper": "^4.9.2",
+    "react-native-reanimated": "^2.2.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "^3.4.0",
+    "react-native-svg": "^12.1.1",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/jest-native": "^4.0.1",
+    "@testing-library/react-hooks": "^7.0.0",
+    "@testing-library/react-native": "^7.2.0",
+    "@types/jest": "^26.0.23",
+    "@types/react-native": "^0.64.5",
+    "@types/react-test-renderer": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-native": "^3.11.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react-native-svg-transformer": "^0.14.3",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-test-renderer": "17.0.1",
+    "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "@types/react": "^17"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "resetMocks": false,
+    "moduleNameMapper": {
+      "@assets/(.*)": "<rootDir>/src/assets/$1",
+      "@components/(.*)": "<rootDir>/src/components/$1",
+      "@consts/(.*)": "<rootDir>/src/consts/$1",
+      "@enums/(.*)": "<rootDir>/src/types/enums/$1",
+      "@features/(.*)": "<rootDir>/src/features/$1",
+      "@generated/(.*)": "<rootDir>/src/types/generated/$1",
+      "@i18n/(.*)": "<rootDir>/src/i18n/$1",
+      "@interfaces/(.*)": "<rootDir>/src/types/interfaces/$1",
+      "@layouts/(.*)": "<rootDir>/src/layouts/$1",
+      "@mocks/(.*)": "<rootDir>/src/mocks/$1",
+      "@screens": "<rootDir>/src/screens/$1",
+      "@themes/(.*)": "<rootDir>/src/themes/$1",
+      "@utils/(.*)": "<rootDir>/src/utils/$1",
+      "\\.svg": "<rootDir>/src/__mocks__/svgrMock.ts"
+    },
+    "setupFiles": [
+      "./src/setupTests.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    }
+  }
+}
