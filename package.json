@@ -93,6 +93,7 @@
       "@components/(.*)": "<rootDir>/src/components/$1",
       "@consts/(.*)": "<rootDir>/src/consts/$1",
       "@enums/(.*)": "<rootDir>/src/types/enums/$1",
+      "@hooks/(.*)": "<rootDir>/src/hooks/$1",
       "@features/(.*)": "<rootDir>/src/features/$1",
       "@generated/(.*)": "<rootDir>/src/types/generated/$1",
       "@i18n/(.*)": "<rootDir>/src/i18n/$1",

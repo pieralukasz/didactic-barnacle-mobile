@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextStyle,
   TouchableWithoutFeedback,
-  View,
   ViewStyle,
 } from "react-native";
 import { Text } from "react-native-paper";
@@ -14,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
+import useKeyboardStatus from "@hooks/useKeyboardStatus";
 
 interface ScreenLayoutProps {
   title?: string;
@@ -31,27 +31,10 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   titleStyles,
   subtitle,
   subtitleStyles,
-  scrollView = false,
   viewStyles,
   loading,
 }) => {
-  const generateTitle = useCallback(() => {
-    if (title) {
-      return <Text style={{ ...styles.title, ...titleStyles }}>{title}</Text>;
-    }
-    return null;
-  }, [title, titleStyles]);
-
-  const generateSubtitle = useCallback(() => {
-    if (subtitle) {
-      return (
-        <Text style={{ ...styles.subtitle, ...subtitleStyles }}>
-          {subtitle}
-        </Text>
-      );
-    }
-    return null;
-  }, [subtitle, subtitleStyles]);
+  const isKeyboardOpen = useKeyboardStatus();
 
   return (
     <>
@@ -65,21 +48,20 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
                   keyboardVerticalOffset: 0,
                 }
               : {})}>
-            {scrollView ? (
-              <ScrollView
-                keyboardShouldPersistTaps="handled"
-                style={{ ...styles.view, ...viewStyles }}>
-                {generateTitle()}
-                {generateSubtitle()}
-                {children}
-              </ScrollView>
-            ) : (
-              <View style={{ ...styles.view, ...viewStyles }}>
-                {generateTitle()}
-                {generateSubtitle()}
-                {children}
-              </View>
-            )}
+            <ScrollView
+              scrollEnabled={isKeyboardOpen}
+              keyboardShouldPersistTaps="handled"
+              style={{ ...styles.view, ...viewStyles }}>
+              {title && (
+                <Text style={{ ...styles.title, ...titleStyles }}>{title}</Text>
+              )}
+              {subtitle && (
+                <Text style={{ ...styles.subtitle, ...subtitleStyles }}>
+                  {subtitle}
+                </Text>
+              )}
+              {children}
+            </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
       </TouchableWithoutFeedback>

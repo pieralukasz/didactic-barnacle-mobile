@@ -31,7 +31,7 @@ const ForgotPasswordSuccessScreen: React.FC<ForgotPasswordSuccessNavigatorProps>
     return (
       <ForgotPasswordSuccessView
         // TODO
-        onSubmit={() => resetNavigation(navigation as any, SignInRoute)}
+        onSubmit={() => resetNavigation(navigation, SignInRoute)}
       />
     );
   };

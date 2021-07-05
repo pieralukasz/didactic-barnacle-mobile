@@ -12,6 +12,7 @@ module.exports = function (api) {
             "@components": "./src/components",
             "@consts": "./src/consts",
             "@enums": "./src/types/enums",
+            "@hooks": "./src/hooks",
             "@features": "./src/features",
             "@generated": "./src/types/generated",
             "@interfaces": "./src/types/interfaces",
