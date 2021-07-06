@@ -16,7 +16,8 @@ const MainNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName={UnprotectedRoute}
-      screenOptions={{ headerShown: false }}>
+      screenOptions={{ headerShown: false }}
+      headerMode="screen">
       <Stack.Screen name={ProtectedRoute} component={ProtectedNavigator} />
       <Stack.Screen name={UnprotectedRoute} component={UnprotectedNavigator} />
       <Stack.Screen name={ErrorRoute} component={View} />

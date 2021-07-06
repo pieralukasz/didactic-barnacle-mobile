@@ -20,7 +20,6 @@ interface ScreenLayoutProps {
   titleStyles?: TextStyle;
   subtitle?: string;
   subtitleStyles?: TextStyle;
-  scrollView?: boolean;
   viewStyles?: ViewStyle;
   loading?: boolean;
   scrollEnabled?: boolean;

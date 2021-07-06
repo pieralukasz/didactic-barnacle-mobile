@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
@@ -34,11 +34,21 @@ const SignUpCreateAccountScreen: React.FC<SignUpCreateAccountProps> = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
+  const onSignUp = useCallback(() => {
+    try {
+      setLoading(true);
+      navigation.navigate(SignUpVerificationRoute);
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  }, [navigation]);
+
   return (
     <SignUpCreateAccountView
-      onSubmit={() => navigation.navigate(SignUpVerificationRoute)}
-      onSignIn={() => resetNavigation(navigation, SignInRoute)}
+      onSubmit={onSignUp}
       loading={loading}
+      onSignIn={() => resetNavigation(navigation, SignInRoute)}
     />
   );
 };

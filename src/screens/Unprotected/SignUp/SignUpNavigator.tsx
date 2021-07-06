@@ -14,6 +14,8 @@ import SignUpVerificationScreen from "@screens/Unprotected/SignUp/SignUpVerifica
 import SignUpSuccessScreen from "@screens/Unprotected/SignUp/SignUpSuccessScreen";
 import SignUpCreateAccountScreen from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen";
 
+import Header from "@components/Header";
+
 import { SignUpNavigatorParams } from "./SignUpNavigatorParams";
 import {
   SignUpCreateAccountRoute,
@@ -40,13 +42,23 @@ interface SignUpNavigatorProps {
 
 const SignUpNavigator: React.FC<SignUpNavigatorProps> = () => {
   return (
-    <Stack.Navigator initialRouteName={SignUpCreateAccountRoute}>
+    <Stack.Navigator
+      initialRouteName={SignUpCreateAccountRoute}
+      screenOptions={{
+        headerShown: false,
+        header: (props) => (
+          <Header onBackButtonPress={() => props.navigation.goBack()} />
+        ),
+      }}
+      headerMode="screen">
       <Stack.Screen
-        options={{ headerShown: false }}
         name={SignUpCreateAccountRoute}
         component={SignUpCreateAccountScreen}
       />
       <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
         name={SignUpVerificationRoute}
         component={SignUpVerificationScreen}
       />
