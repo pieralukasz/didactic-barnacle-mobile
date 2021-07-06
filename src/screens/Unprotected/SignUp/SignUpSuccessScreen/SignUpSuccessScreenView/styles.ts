@@ -4,17 +4,17 @@ import theme from "@themes/defaultTheme";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
   },
   title: {
-    marginVertical: 32,
+    paddingVertical: theme.spacing.default * 2,
   },
-  subtitle: {
-    fontSize: 16,
-    color: theme.colors.placeholder,
-    marginBottom: 16,
-  },
-  view: {
-    paddingHorizontal: 20,
+  button: {
+    width: "100%",
   },
 });
 

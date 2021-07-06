@@ -17,6 +17,7 @@ import { useHeaderHeight } from "@react-navigation/stack";
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
 import useKeyboardStatus from "@hooks/useKeyboardStatus";
+import Title from "@components/Title";
 
 interface ScreenLayoutProps {
   title?: string;
@@ -85,7 +86,9 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
                 paddingTop: setTopPadding(),
               }}>
               {title && (
-                <Text style={{ ...styles.title, ...titleStyles }}>{title}</Text>
+                <Title titleStyles={{ ...styles.title, ...titleStyles }}>
+                  {title}
+                </Title>
               )}
               {subtitle && (
                 <Text style={{ ...styles.subtitle, ...subtitleStyles }}>
