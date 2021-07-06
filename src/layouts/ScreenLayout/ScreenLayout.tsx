@@ -23,6 +23,7 @@ interface ScreenLayoutProps {
   scrollView?: boolean;
   viewStyles?: ViewStyle;
   loading?: boolean;
+  scrollEnabled?: boolean;
 }
 
 const ScreenLayout: React.FC<ScreenLayoutProps> = ({
@@ -33,6 +34,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   subtitleStyles,
   viewStyles,
   loading,
+  scrollEnabled = false,
 }) => {
   const isKeyboardOpen = useKeyboardStatus();
 
@@ -49,7 +51,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
                 }
               : {})}>
             <ScrollView
-              scrollEnabled={isKeyboardOpen}
+              scrollEnabled={scrollEnabled || isKeyboardOpen}
               keyboardShouldPersistTaps="handled"
               style={{ ...styles.view, ...viewStyles }}>
               {title && (

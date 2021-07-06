@@ -13,6 +13,9 @@ interface Props<T extends FieldValues> {
   multiline?: boolean;
   disabled?: boolean;
   leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
+  secureTextEntry?: boolean;
+  onPressRightIcon?: () => void;
 }
 
 const TextInputField = <T extends FieldValues>({
@@ -26,6 +29,9 @@ const TextInputField = <T extends FieldValues>({
   disabled = false,
   placeHolder = undefined,
   leftIcon,
+  rightIcon,
+  secureTextEntry = false,
+  onPressRightIcon,
 }: Props<T>): JSX.Element => (
   <Controller
     name={name}
@@ -42,7 +48,16 @@ const TextInputField = <T extends FieldValues>({
           disabled={disabled}
           onChangeText={onChange}
           onBlur={onBlur}
+          secureTextEntry={secureTextEntry}
           left={leftIcon && <TextInput.Icon name={() => leftIcon} />}
+          right={
+            rightIcon && (
+              <TextInput.Icon
+                name={() => rightIcon}
+                onPress={onPressRightIcon}
+              />
+            )
+          }
         />
         <HelperText type="error" visible={error}>
           {errorMessage}

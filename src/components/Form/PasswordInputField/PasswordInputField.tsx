@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Control, FieldError, FieldValues, Path } from "react-hook-form";
 
 import TextInputField from "@components/Form/TextInputField";
 import PasswordIcon from "@assets/icons/PasswordIcon.svg";
+import PasswordInvisibleIcon from "@assets/icons/PasswordInvisibleIcon.svg";
+import PasswordVisibilityIcon from "@assets/icons/PasswordVisibleIcon.svg";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
@@ -13,6 +15,7 @@ interface Props<T extends FieldValues> {
   placeholder?: string;
   label?: string;
   disabled?: boolean;
+  showVisibility?: boolean;
 }
 
 const PasswordInputField = <T extends FieldValues>({
@@ -24,18 +27,30 @@ const PasswordInputField = <T extends FieldValues>({
   disabled,
   placeholder = "Password",
   label = "Password",
-}: Props<T>): JSX.Element => (
-  <TextInputField
-    name={name}
-    control={control}
-    error={!!error}
-    errorMessage={errorMessage}
-    label={label}
-    placeHolder={placeholder}
-    disabled={disabled}
-    autoFocus={autoFocus}
-    leftIcon={<PasswordIcon />}
-  />
-);
+  showVisibility = true,
+}: Props<T>): JSX.Element => {
+  const [visibility, setVisibility] = useState<boolean>(true);
+
+  const renderEyeIcon = useCallback(() => {
+    return visibility ? <PasswordVisibilityIcon /> : <PasswordInvisibleIcon />;
+  }, [visibility]);
+
+  return (
+    <TextInputField
+      name={name}
+      control={control}
+      error={!!error}
+      errorMessage={errorMessage}
+      label={label}
+      placeHolder={placeholder}
+      disabled={disabled}
+      autoFocus={autoFocus}
+      leftIcon={<PasswordIcon />}
+      rightIcon={showVisibility ? renderEyeIcon() : undefined}
+      secureTextEntry={visibility}
+      onPressRightIcon={() => setVisibility(!visibility)}
+    />
+  );
+};
 
 export default PasswordInputField;

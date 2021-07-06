@@ -3,7 +3,7 @@ import theme from "@themes/defaultTheme";
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: theme.spacing.default * 3,
+    paddingTop: theme.spacing.default * 2,
   },
   forgotPassword: {
     flexDirection: "row-reverse",

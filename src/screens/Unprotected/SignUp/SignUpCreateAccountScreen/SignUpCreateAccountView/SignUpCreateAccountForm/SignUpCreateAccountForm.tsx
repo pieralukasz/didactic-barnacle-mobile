@@ -5,21 +5,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Form from "@components/Form";
 import EmailInputField from "@components/Form/EmailInputField";
+import PhoneNumberField from "@components/Form/PhoneNumberField";
 import PasswordInputField from "@components/Form/PasswordInputField";
-
-import SignInFormState from "@screens/Unprotected/SignInScreen/SignInView/SignInForm/SignInFormState";
 import signInFormValidationSchema from "@screens/Unprotected/SignInScreen/SignInView/SignInForm/signInFormValidationSchema";
 
-interface SignInFormProps {
-  onSubmit: (data: SignInFormState) => void;
+import SignUpCreateAccountFormState from "./SignUpCreateAccountFormState";
+
+interface SignUpCreateAccountFormProps {
+  onSubmit: (data: SignUpCreateAccountFormState) => void;
 }
 
-const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
+const SignUpCreateAccountForm: React.FC<SignUpCreateAccountFormProps> = ({
+  onSubmit,
+}) => {
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<SignInFormState>({
+  } = useForm<SignUpCreateAccountFormState>({
     resolver: yupResolver(signInFormValidationSchema()),
     mode: "onTouched",
     reValidateMode: "onChange",
@@ -28,9 +31,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
   return (
     <Form
       submitButton={{
-        text: "Sign in",
-        disabled: !isValid,
+        text: "Sign up",
         onSubmit: handleSubmit(onSubmit),
+        disabled: !isValid,
       }}>
       <EmailInputField
         name="email"
@@ -38,15 +41,26 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         error={errors.email}
         errorMessage={errors.email?.message}
       />
+      <PhoneNumberField
+        name="phone"
+        control={control}
+        error={errors.phone}
+        errorMessage={errors.phone?.message}
+      />
       <PasswordInputField
         name="password"
         control={control}
         error={errors.password}
         errorMessage={errors.password?.message}
-        showVisibility={false}
+      />
+      <PasswordInputField
+        name="confirmPassword"
+        control={control}
+        error={errors.confirmPassword}
+        errorMessage={errors.confirmPassword?.message}
       />
     </Form>
   );
 };
 
-export default SignInForm;
+export default SignUpCreateAccountForm;
