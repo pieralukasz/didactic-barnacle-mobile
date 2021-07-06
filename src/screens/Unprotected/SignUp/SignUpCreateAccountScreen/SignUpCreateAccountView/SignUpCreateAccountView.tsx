@@ -22,7 +22,7 @@ const SignUpCreateAccountView: React.FC<SignUpCreateAccountViewProps> = ({
   onSignIn,
 }) => {
   return (
-    <ScreenLayout title="Create your account" viewStyles={styles.container}>
+    <ScreenLayout title="Create your account">
       <SignUpCreateAccountForm onSubmit={onSubmit} />
       <View style={styles.signIn}>
         <Text style={styles.signInText}>Already have an account?</Text>

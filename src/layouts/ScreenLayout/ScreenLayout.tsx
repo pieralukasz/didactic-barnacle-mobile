@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -7,9 +7,12 @@ import {
   TextStyle,
   TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from "react-native";
 import { Text } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useHeaderHeight } from "@react-navigation/stack";
 
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
@@ -36,12 +39,36 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   scrollEnabled = false,
 }) => {
   const isKeyboardOpen = useKeyboardStatus();
+  const headerHeight = useHeaderHeight();
+
+  const { bottom, left, right } = useSafeAreaInsets();
+
+  const setTopPadding = useCallback(
+    () =>
+      headerHeight > 0
+        ? Platform.select({
+            android: 4,
+            ios: 8,
+          })
+        : Platform.select({
+            android: 24,
+            ios: 48,
+          }),
+    [headerHeight]
+  );
 
   return (
     <>
       {loading && <FullScreenPreloader visible={loading} />}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <SafeAreaView style={styles.container}>
+        <View
+          style={{
+            ...styles.container,
+            paddingBottom: bottom,
+            paddingLeft: left,
+            paddingTop: setTopPadding(),
+            paddingRight: right,
+          }}>
           <KeyboardAvoidingView
             {...(Platform.OS === "ios"
               ? {
@@ -52,7 +79,11 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
             <ScrollView
               scrollEnabled={scrollEnabled || isKeyboardOpen}
               keyboardShouldPersistTaps="handled"
-              style={{ ...styles.view, ...viewStyles }}>
+              style={{
+                ...styles.view,
+                ...viewStyles,
+                paddingTop: setTopPadding(),
+              }}>
               {title && (
                 <Text style={{ ...styles.title, ...titleStyles }}>{title}</Text>
               )}
@@ -64,7 +95,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
               {children}
             </ScrollView>
           </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
       </TouchableWithoutFeedback>
     </>
   );

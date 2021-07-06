@@ -13,6 +13,7 @@ import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavi
 import resetNavigation from "@utils/navigation/resetNavigation";
 
 import SignUpCreateAccountView from "./SignUpCreateAccountView";
+import SignUpCreateAccountFormState from "./SignUpCreateAccountView/SignUpCreateAccountForm/SignUpCreateAccountFormState";
 
 type SignUpCreateAccountNavigationProp = CompositeNavigationProp<
   StackNavigationProp<SignUpNavigatorParams, typeof SignUpCreateAccountRoute>,
@@ -34,15 +35,20 @@ const SignUpCreateAccountScreen: React.FC<SignUpCreateAccountProps> = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const onSignUp = useCallback(() => {
-    try {
-      setLoading(true);
-      navigation.navigate(SignUpVerificationRoute);
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
-  }, [navigation]);
+  const onSignUp = useCallback(
+    (data: SignUpCreateAccountFormState) => {
+      try {
+        setLoading(true);
+        navigation.navigate(SignUpVerificationRoute, {
+          phoneNumber: data.phoneNumber,
+        });
+        setLoading(false);
+      } catch {
+        setLoading(false);
+      }
+    },
+    [navigation]
+  );
 
   return (
     <SignUpCreateAccountView

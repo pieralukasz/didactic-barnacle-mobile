@@ -42,10 +42,10 @@ const SignUpCreateAccountForm: React.FC<SignUpCreateAccountFormProps> = ({
         errorMessage={errors.email?.message}
       />
       <PhoneNumberField
-        name="phone"
+        name="phoneNumber"
         control={control}
-        error={errors.phone}
-        errorMessage={errors.phone?.message}
+        error={errors.phoneNumber}
+        errorMessage={errors.phoneNumber?.message}
       />
       <PasswordInputField
         name="password"

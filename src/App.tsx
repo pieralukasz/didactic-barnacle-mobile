@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StatusBar } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import Providers from "@features/Providers";
@@ -13,8 +13,11 @@ const App: React.FC = () => {
   return (
     <>
       <StatusBar
-        backgroundColor={theme.customColors.black}
-        barStyle="dark-content"
+        barStyle={Platform.select({
+          android: "light-content",
+          ios: "dark-content",
+        })}
+        backgroundColor={theme.colors.primary}
       />
       <Providers>
         <NavigationContainer ref={rootNavigationRef}>

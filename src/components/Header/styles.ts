@@ -1,9 +1,16 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    flex: 1,
+    elevation: 0,
+    height: Platform.select({
+      android: 36,
+      ios: 44,
+    }),
+    borderBottomWidth: 0,
+    shadowColor: "transparent",
+    flexDirection: "row",
   },
 });
 

@@ -1,11 +1,14 @@
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useCallback, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
 import { SignUpNavigatorParams } from "@screens/Unprotected/SignUp/SignUpNavigatorParams";
-import { SignUpVerificationRoute } from "@screens/Unprotected/SignUp/routes";
-import { Text } from "react-native-paper";
+import {
+  SignUpSuccessRoute,
+  SignUpVerificationRoute,
+} from "@screens/Unprotected/SignUp/routes";
+import SignUpVerificationView from "@screens/Unprotected/SignUp/SignUpVerificationScreen/SignUpVerificationView";
+import SignUpVerificationFormState from "./SignUpVerificationView/SignUpVerificationForm/SignUpVerificationFormState";
 
 type SignUpVerificationNavigationProp = StackNavigationProp<
   SignUpNavigatorParams,
@@ -22,11 +25,33 @@ interface SignUpVerificationProps {
   route: SignUpVerificationRouteProp;
 }
 
-const SignUpVerificationScreen: React.FC<SignUpVerificationProps> = () => {
+const SignUpVerificationScreen: React.FC<SignUpVerificationProps> = ({
+  navigation,
+  route,
+}) => {
+  const { phoneNumber } = route.params;
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const onVerifyCode = useCallback(
+    (data: SignUpVerificationFormState) => {
+      try {
+        setLoading(true);
+        console.log(data);
+        setLoading(false);
+        navigation.navigate(SignUpSuccessRoute);
+      } catch {
+        setLoading(false);
+      }
+    },
+    [navigation]
+  );
+
   return (
-    <SafeAreaView>
-      <Text>VERIFY</Text>
-    </SafeAreaView>
+    <SignUpVerificationView
+      onSubmit={onVerifyCode}
+      loading={loading}
+      phoneNumber={phoneNumber}
+    />
   );
 };
 

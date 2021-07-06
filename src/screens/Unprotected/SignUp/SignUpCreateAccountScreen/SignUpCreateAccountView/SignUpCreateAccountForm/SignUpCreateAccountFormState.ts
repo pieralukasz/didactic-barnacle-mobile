@@ -1,6 +1,6 @@
 interface SignUpFormState {
   email: string;
-  phone?: string;
+  phoneNumber: string | number;
   password: string;
   confirmPassword: string;
 }
