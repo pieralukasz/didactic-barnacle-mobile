@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.default,
     fontWeight: "bold",
   },
+  resendButton: {
+    marginTop: theme.spacing.default,
+  },
 });
 
 export default styles;

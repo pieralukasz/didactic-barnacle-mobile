@@ -3,25 +3,25 @@ import { View } from "react-native";
 import { Text } from "react-native-paper";
 import ScreenLayout from "@layouts/ScreenLayout";
 import CommonViewProps from "@interfaces/CommonViewProps";
-import SignUpVerificationForm from "@screens/Unprotected/SignUp/SignUpVerificationScreen/SignUpVerificationView/SignUpVerificationForm";
-
-import theme from "@themes/defaultTheme";
 
 import Button from "@components/Button";
 
-import styles from "./styles";
-
+import SignUpVerificationForm from "./SignUpVerificationForm";
 import SignUpVerificationFormState from "./SignUpVerificationForm/SignUpVerificationFormState";
+
+import styles from "./styles";
 
 interface SignUpVerificationViewProps
   extends CommonViewProps<SignUpVerificationFormState> {
   phoneNumber: string | number;
+  onResentCode: () => void;
 }
 
 const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
   onSubmit,
   loading,
   phoneNumber,
+  onResentCode,
 }) => {
   return (
     <ScreenLayout title="Enter verification code" loading={loading}>
@@ -37,7 +37,11 @@ const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
         </Text>
       </View>
       <SignUpVerificationForm onSubmit={onSubmit} />
-      <Button style={{ marginTop: theme.spacing.default }} type="secondary">
+      <Button
+        type="secondary"
+        testId="signup-resent-button"
+        onPress={onResentCode}
+        style={styles.resendButton}>
         Resent verification code
       </Button>
     </ScreenLayout>

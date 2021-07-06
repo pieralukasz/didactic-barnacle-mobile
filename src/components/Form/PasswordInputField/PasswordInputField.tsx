@@ -16,6 +16,7 @@ interface Props<T extends FieldValues> {
   label?: string;
   disabled?: boolean;
   showVisibility?: boolean;
+  testId: string;
 }
 
 const PasswordInputField = <T extends FieldValues>({
@@ -28,6 +29,7 @@ const PasswordInputField = <T extends FieldValues>({
   placeholder = "Password",
   label = "Password",
   showVisibility = true,
+  testId,
 }: Props<T>): JSX.Element => {
   const [visibility, setVisibility] = useState<boolean>(true);
 
@@ -49,6 +51,7 @@ const PasswordInputField = <T extends FieldValues>({
       rightIcon={showVisibility ? renderEyeIcon() : undefined}
       secureTextEntry={visibility}
       onPressRightIcon={() => setVisibility(!visibility)}
+      testId={testId}
     />
   );
 };

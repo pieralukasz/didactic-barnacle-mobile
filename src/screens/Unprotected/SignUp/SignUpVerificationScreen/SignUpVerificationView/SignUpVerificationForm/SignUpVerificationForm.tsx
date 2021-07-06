@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -30,12 +29,14 @@ const SignUpVerificationForm: React.FC<SignUpVerificationFormProps> = ({
     <Form
       submitButton={{
         text: "Submit",
+        testId: "signup-verification-button",
         disabled: !isValid,
         onSubmit: handleSubmit(onSubmit),
       }}>
       <VerificationCodeInputField
-        control={control}
         name="verificationCode"
+        testId="signup-verification-code"
+        control={control}
         error={errors.verificationCode}
         errorMessage={errors.verificationCode?.message}
       />

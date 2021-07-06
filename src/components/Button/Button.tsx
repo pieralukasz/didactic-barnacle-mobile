@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Button as PaperButton } from "react-native-paper";
 import theme from "@themes/defaultTheme";
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 
 interface ButtonModeType {
   mode?: "text" | "outlined" | "contained";
@@ -9,6 +10,7 @@ interface ButtonModeType {
 
 type Props = React.ComponentProps<typeof PaperButton> & {
   type?: "default" | "secondary" | "text";
+  testId?: string;
 };
 
 const Button: React.FC<Props> = (props) => {
@@ -35,6 +37,7 @@ const Button: React.FC<Props> = (props) => {
   return (
     <PaperButton
       {...props}
+      {...attachAccessibilityID(props.testId ?? "button")}
       mode={buttonType.mode}
       color={buttonType.color}
       uppercase={buttonType.mode !== "text"}

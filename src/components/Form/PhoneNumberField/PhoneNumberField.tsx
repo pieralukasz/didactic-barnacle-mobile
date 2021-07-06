@@ -5,36 +5,39 @@ import TextInputField from "@components/Form/TextInputField";
 import PhoneIcon from "@assets/icons/PhoneIcon.svg";
 
 interface Props<T extends FieldValues> {
-  name: Path<T>;
+  autoFocus?: boolean;
   control: Control<T>;
+  disabled?: boolean;
   error?: FieldError;
   errorMessage?: string;
-  autoFocus?: boolean;
-  placeholder?: string;
   label?: string;
-  disabled?: boolean;
+  name: Path<T>;
+  placeholder?: string;
+  testId: string;
 }
 
 const PhoneNumberInputField = <T extends FieldValues>({
-  name,
+  autoFocus,
+  control,
+  disabled,
   error,
   errorMessage,
-  control,
-  autoFocus,
-  disabled,
-  placeholder = "Phone",
   label = "Phone",
+  name,
+  placeholder = "Phone",
+  testId,
 }: Props<T>): JSX.Element => (
   <TextInputField
-    name={name}
+    autoFocus={autoFocus}
     control={control}
+    disabled={disabled}
     error={!!error}
     errorMessage={errorMessage}
     label={label}
-    placeHolder={placeholder}
-    disabled={disabled}
-    autoFocus={autoFocus}
     leftIcon={<PhoneIcon />}
+    name={name}
+    placeHolder={placeholder}
+    testId={testId}
   />
 );
 

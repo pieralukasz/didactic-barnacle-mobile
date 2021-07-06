@@ -1,6 +1,7 @@
 import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { Control, FieldValues, Controller, Path } from "react-hook-form";
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
@@ -16,6 +17,7 @@ interface Props<T extends FieldValues> {
   rightIcon?: JSX.Element;
   secureTextEntry?: boolean;
   onPressRightIcon?: () => void;
+  testId: string;
 }
 
 const TextInputField = <T extends FieldValues>({
@@ -32,6 +34,7 @@ const TextInputField = <T extends FieldValues>({
   rightIcon,
   secureTextEntry = false,
   onPressRightIcon,
+  testId,
 }: Props<T>): JSX.Element => (
   <Controller
     name={name}
@@ -39,6 +42,7 @@ const TextInputField = <T extends FieldValues>({
     render={({ field: { onChange, onBlur, value } }) => (
       <>
         <TextInput
+          {...attachAccessibilityID(testId)}
           label={label}
           placeholder={placeHolder}
           mode="outlined"

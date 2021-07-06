@@ -29,17 +29,20 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
     <Form
       submitButton={{
         text: "Sign in",
+        testId: "signin-button",
         disabled: !isValid,
         onSubmit: handleSubmit(onSubmit),
       }}>
       <EmailInputField
         name="email"
+        testId="signin-email"
         control={control}
         error={errors.email}
         errorMessage={errors.email?.message}
       />
       <PasswordInputField
         name="password"
+        testId="signin-password"
         control={control}
         error={errors.password}
         errorMessage={errors.password?.message}

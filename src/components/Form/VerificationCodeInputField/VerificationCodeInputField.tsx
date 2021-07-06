@@ -13,6 +13,7 @@ interface Props<T extends FieldValues> {
   label?: string;
   name: Path<T>;
   placeholder?: string;
+  testId: string;
 }
 
 const VerificationCodeInputField = <T extends FieldValues>({
@@ -24,6 +25,7 @@ const VerificationCodeInputField = <T extends FieldValues>({
   label = "Verification Code",
   name,
   placeholder = "Verification Code",
+  testId,
 }: Props<T>): JSX.Element => (
   <TextInputField
     autoFocus={autoFocus}
@@ -32,9 +34,10 @@ const VerificationCodeInputField = <T extends FieldValues>({
     error={!!error}
     errorMessage={errorMessage}
     label={label}
+    leftIcon={<VerificationCodeIcon />}
     name={name}
     placeHolder={placeholder}
-    leftIcon={<VerificationCodeIcon />}
+    testId={testId}
   />
 );
 

@@ -3,6 +3,8 @@ import { Platform, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import attachAccessibilityID from "@utils/attachAccessibilityID";
+
 import ArrowLeft from "@assets/icons/ArrowLeftIcon.svg";
 
 import styles from "./styles";
@@ -26,7 +28,11 @@ const Header: React.FC<Props> = ({ onBackButtonPress }) => {
         paddingBottom: bottom,
         ...styles.header,
       }}>
-      <IconButton onPress={onBackButtonPress} icon={ArrowLeft} />
+      <IconButton
+        {...attachAccessibilityID("back-button")}
+        onPress={onBackButtonPress}
+        icon={ArrowLeft}
+      />
     </View>
   );
 };
