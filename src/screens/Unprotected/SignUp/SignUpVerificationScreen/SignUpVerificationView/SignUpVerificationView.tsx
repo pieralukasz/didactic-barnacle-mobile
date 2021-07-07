@@ -39,7 +39,7 @@ const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
       <SignUpVerificationForm onSubmit={onSubmit} />
       <Button
         type="secondary"
-        testId="signup-resent-button"
+        dataTestId="sign-up-resent-button"
         onPress={onResentCode}
         style={styles.resendButton}>
         Resent verification code

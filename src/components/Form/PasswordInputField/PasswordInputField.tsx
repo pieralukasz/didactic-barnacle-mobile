@@ -7,29 +7,29 @@ import PasswordInvisibleIcon from "@assets/icons/PasswordInvisibleIcon.svg";
 import PasswordVisibilityIcon from "@assets/icons/PasswordVisibleIcon.svg";
 
 interface Props<T extends FieldValues> {
-  name: Path<T>;
+  autoFocus?: boolean;
   control: Control<T>;
+  dataTestId?: string;
+  disabled?: boolean;
   error?: FieldError;
   errorMessage?: string;
-  autoFocus?: boolean;
-  placeholder?: string;
   label?: string;
-  disabled?: boolean;
+  name: Path<T>;
+  placeholder?: string;
   showVisibility?: boolean;
-  testId: string;
 }
 
 const PasswordInputField = <T extends FieldValues>({
-  name,
+  autoFocus,
+  control,
+  dataTestId = "password-input-field",
+  disabled,
   error,
   errorMessage,
-  control,
-  autoFocus,
-  disabled,
-  placeholder = "Password",
   label = "Password",
+  name,
+  placeholder = "Password",
   showVisibility = true,
-  testId,
 }: Props<T>): JSX.Element => {
   const [visibility, setVisibility] = useState<boolean>(true);
 
@@ -39,19 +39,19 @@ const PasswordInputField = <T extends FieldValues>({
 
   return (
     <TextInputField
-      name={name}
+      autoFocus={autoFocus}
       control={control}
+      dataTestId={dataTestId}
+      disabled={disabled}
       error={!!error}
       errorMessage={errorMessage}
       label={label}
-      placeHolder={placeholder}
-      disabled={disabled}
-      autoFocus={autoFocus}
       leftIcon={<PasswordIcon />}
+      name={name}
+      onPressRightIcon={() => setVisibility(!visibility)}
+      placeHolder={placeholder}
       rightIcon={showVisibility ? renderEyeIcon() : undefined}
       secureTextEntry={visibility}
-      onPressRightIcon={() => setVisibility(!visibility)}
-      testId={testId}
     />
   );
 };

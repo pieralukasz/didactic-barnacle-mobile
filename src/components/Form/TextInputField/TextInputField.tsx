@@ -4,45 +4,45 @@ import { Control, FieldValues, Controller, Path } from "react-hook-form";
 import attachAccessibilityID from "@utils/attachAccessibilityID";
 
 interface Props<T extends FieldValues> {
-  name: Path<T>;
+  autoFocus?: boolean;
   control: Control<T>;
+  dataTestId: string;
+  disabled?: boolean;
   error: boolean;
   errorMessage?: string;
   label: string;
-  autoFocus?: boolean;
-  placeHolder?: string;
-  multiline?: boolean;
-  disabled?: boolean;
   leftIcon?: JSX.Element;
+  multiline?: boolean;
+  name: Path<T>;
+  onPressRightIcon?: () => void;
+  placeHolder?: string;
   rightIcon?: JSX.Element;
   secureTextEntry?: boolean;
-  onPressRightIcon?: () => void;
-  testId: string;
 }
 
 const TextInputField = <T extends FieldValues>({
-  name,
+  autoFocus = false,
   control,
+  dataTestId,
+  disabled = false,
   error,
   errorMessage,
   label,
-  autoFocus = false,
-  multiline = false,
-  disabled = false,
-  placeHolder = undefined,
   leftIcon,
+  multiline = false,
+  name,
+  onPressRightIcon,
+  placeHolder = undefined,
   rightIcon,
   secureTextEntry = false,
-  onPressRightIcon,
-  testId,
 }: Props<T>): JSX.Element => (
   <Controller
     name={name}
     control={control}
-    render={({ field: { onChange, onBlur, value } }) => (
+    render={({ field: { onChange, onBlur } }) => (
       <>
         <TextInput
-          {...attachAccessibilityID(testId)}
+          {...attachAccessibilityID(dataTestId)}
           label={label}
           placeholder={placeHolder}
           mode="outlined"

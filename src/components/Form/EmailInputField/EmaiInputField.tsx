@@ -13,7 +13,7 @@ interface Props<T extends FieldValues> {
   label?: string;
   name: Path<T>;
   placeholder?: string;
-  testId: string;
+  dataTestId?: string;
 }
 
 const EmailInputField = <T extends FieldValues>({
@@ -25,11 +25,12 @@ const EmailInputField = <T extends FieldValues>({
   label = "Email",
   name,
   placeholder = "Email",
-  testId,
+  dataTestId = "email-input-field",
 }: Props<T>): JSX.Element => (
   <TextInputField
     autoFocus={autoFocus}
     control={control}
+    dataTestId={dataTestId}
     disabled={disabled}
     error={!!error}
     errorMessage={errorMessage}
@@ -37,7 +38,6 @@ const EmailInputField = <T extends FieldValues>({
     leftIcon={<EmailIcon />}
     name={name}
     placeHolder={placeholder}
-    testId={testId}
   />
 );
 

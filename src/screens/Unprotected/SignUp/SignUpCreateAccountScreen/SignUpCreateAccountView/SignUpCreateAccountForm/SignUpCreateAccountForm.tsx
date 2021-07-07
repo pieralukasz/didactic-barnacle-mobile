@@ -32,34 +32,31 @@ const SignUpCreateAccountForm: React.FC<SignUpCreateAccountFormProps> = ({
     <Form
       submitButton={{
         text: "Sign up",
-        testId: "signup-button",
+        dataTestId: "sign-up-button",
         onSubmit: handleSubmit(onSubmit),
         disabled: !isValid,
       }}>
       <EmailInputField
         name="email"
-        testId="signup-email"
         control={control}
         error={errors.email}
         errorMessage={errors.email?.message}
       />
       <PhoneNumberField
         name="phoneNumber"
-        testId="signup-phone-number"
         control={control}
         error={errors.phoneNumber}
         errorMessage={errors.phoneNumber?.message}
       />
       <PasswordInputField
         name="password"
-        testId="signup-password"
         control={control}
         error={errors.password}
         errorMessage={errors.password?.message}
       />
       <PasswordInputField
         name="confirmPassword"
-        testId="signup-confirm-password"
+        dataTestId="confirm-password-input-field"
         control={control}
         error={errors.confirmPassword}
         errorMessage={errors.confirmPassword?.message}

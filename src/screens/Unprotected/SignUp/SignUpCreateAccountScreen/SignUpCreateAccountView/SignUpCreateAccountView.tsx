@@ -20,13 +20,14 @@ interface SignUpCreateAccountViewProps
 const SignUpCreateAccountView: React.FC<SignUpCreateAccountViewProps> = ({
   onSubmit,
   onSignIn,
+  loading,
 }) => {
   return (
-    <ScreenLayout title="Create your account">
+    <ScreenLayout title="Create your account" loading={loading}>
       <SignUpCreateAccountForm onSubmit={onSubmit} />
       <View style={styles.signIn}>
         <Text style={styles.signInText}>Already have an account?</Text>
-        <Button type="secondary" testId="signin-button" onPress={onSignIn}>
+        <Button type="secondary" dataTestId="sign-in-button" onPress={onSignIn}>
           Sign in
         </Button>
       </View>

@@ -5,22 +5,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "@components/Form";
 import VerificationCodeInputField from "@components/Form/VerificationCodeInputField";
 
-import signUpVerificationFormValidationSchema from "./signUpVerificationFormValidationSchema";
-import SignUpVerificationFormState from "./SignUpVerificationFormState";
+import forgotPasswordVerificationFormValidationSchema from "./forgotPasswordVerificationFormValidationSchema";
+import ForgotPasswordVerificationFormState from "./ForgotPasswordVerificationFormState";
 
 interface SignUpVerificationFormProps {
-  onSubmit: (data: SignUpVerificationFormState) => void;
+  onSubmit: (data: ForgotPasswordVerificationFormState) => void;
 }
 
-const SignUpVerificationForm: React.FC<SignUpVerificationFormProps> = ({
+const ForgotPasswordVerificationForm: React.FC<SignUpVerificationFormProps> = ({
   onSubmit,
 }) => {
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<SignUpVerificationFormState>({
-    resolver: yupResolver(signUpVerificationFormValidationSchema()),
+  } = useForm<ForgotPasswordVerificationFormState>({
+    resolver: yupResolver(forgotPasswordVerificationFormValidationSchema()),
     mode: "onChange",
     reValidateMode: "onChange",
   });
@@ -43,4 +43,4 @@ const SignUpVerificationForm: React.FC<SignUpVerificationFormProps> = ({
   );
 };
 
-export default SignUpVerificationForm;
+export default ForgotPasswordVerificationForm;

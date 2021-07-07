@@ -2,9 +2,10 @@ import React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
+import SuccessScreen from "@screens/Common/SuccessScreen";
+
 import { SignUpNavigatorParams } from "@screens/Unprotected/SignUp/SignUpNavigatorParams";
 import { SignUpSuccessRoute } from "@screens/Unprotected/SignUp/routes";
-import SignUpSuccessScreenView from "@screens/Unprotected/SignUp/SignUpSuccessScreen/SignUpSuccessScreenView";
 import { SignInRoute } from "@screens/Unprotected/routes";
 
 import resetNavigation from "@utils/navigation/resetNavigation";
@@ -26,8 +27,13 @@ interface SignUpSuccessProps {
 
 const SignUpSuccessScreen: React.FC<SignUpSuccessProps> = ({ navigation }) => {
   return (
-    <SignUpSuccessScreenView
-      onSignIn={() => resetNavigation(navigation, SignInRoute)}
+    <SuccessScreen
+      title="Successfully verified"
+      submitButton={{
+        onSubmit: () => resetNavigation(navigation, SignInRoute),
+        text: "Go to sign in",
+        dataTestId: "sign-in-button",
+      }}
     />
   );
 };

@@ -2,11 +2,11 @@ import { StyleSheet } from "react-native";
 import theme from "@themes/defaultTheme";
 
 const styles = StyleSheet.create({
-  subtitle: {
+  textInfo: {
     fontSize: 16,
-    paddingBottom: theme.spacing.default,
+    marginBottom: theme.spacing.default,
   },
-  signInButton: {
+  cancelButton: {
     marginTop: theme.spacing.default,
   },
 });
