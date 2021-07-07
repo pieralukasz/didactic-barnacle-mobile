@@ -2,7 +2,7 @@ import React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
-import SuccessScreen from "@components/SuccessScreen";
+import SuccessScreen from "@screens/Common/SuccessScreen";
 
 import { SignUpNavigatorParams } from "@screens/Unprotected/SignUp/SignUpNavigatorParams";
 import { SignUpSuccessRoute } from "@screens/Unprotected/SignUp/routes";

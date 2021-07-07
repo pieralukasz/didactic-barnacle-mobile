@@ -18,9 +18,10 @@ interface ForgotPasswordEmailViewProps
 const ForgotPasswordEmailView: React.FC<ForgotPasswordEmailViewProps> = ({
   onSignIn,
   onSubmit,
+  loading,
 }) => {
   return (
-    <ScreenLayout title="Forgot your password?">
+    <ScreenLayout title="Forgot your password?" loading={loading}>
       <Text style={styles.subtitle}>
         Please write email you used during create account process. We will send
         you a verification code via sms.

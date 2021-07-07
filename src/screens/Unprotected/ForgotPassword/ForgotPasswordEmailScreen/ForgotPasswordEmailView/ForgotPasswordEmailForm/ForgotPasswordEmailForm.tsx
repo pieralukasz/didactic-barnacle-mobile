@@ -33,8 +33,8 @@ const ForgotPasswordEmailForm: React.FC<ForgotPasswordEmailFormProps> = ({
         onSubmit: handleSubmit(onSubmit),
       }}>
       <EmailInputField
-        control={control}
         name="email"
+        control={control}
         error={errors.email}
         errorMessage={errors.email?.message}
       />

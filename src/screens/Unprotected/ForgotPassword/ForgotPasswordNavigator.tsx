@@ -13,13 +13,15 @@ import { ForgotPasswordParams } from "@screens/Unprotected/ForgotPassword/Forgot
 
 import {
   ForgotPasswordEmailRoute,
+  ForgotPasswordResetRoute,
   ForgotPasswordSuccessRoute,
-  ForgotPasswordVerificationCodeRoute,
+  ForgotPasswordVerificationRoute,
 } from "@screens/Unprotected/ForgotPassword/routes";
 
 import ForgotPasswordEmailScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordEmailScreen";
-import ForgotPasswordVerificationCodeScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationCodeScreen";
+import ForgotPasswordVerificationScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationScreen";
 import ForgotPasswordSuccessScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordSuccessScreen";
+import ForgotPasswordResetScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordResetScreen";
 import Header from "@components/Header/Header";
 
 const Stack = createStackNavigator<ForgotPasswordParams>();
@@ -48,15 +50,21 @@ const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
       screenOptions={{
         headerShown: false,
         header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
-      }}>
+      }}
+      headerMode="screen">
       <Stack.Screen
         name={ForgotPasswordEmailRoute}
         component={ForgotPasswordEmailScreen}
       />
       <Stack.Screen
         options={{ headerShown: true }}
-        name={ForgotPasswordVerificationCodeRoute}
-        component={ForgotPasswordVerificationCodeScreen}
+        name={ForgotPasswordVerificationRoute}
+        component={ForgotPasswordVerificationScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name={ForgotPasswordResetRoute}
+        component={ForgotPasswordResetScreen}
       />
       <Stack.Screen
         name={ForgotPasswordSuccessRoute}

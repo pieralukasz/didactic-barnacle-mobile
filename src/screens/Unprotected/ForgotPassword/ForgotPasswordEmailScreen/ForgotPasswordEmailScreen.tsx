@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 
@@ -10,39 +10,48 @@ import resetNavigation from "@utils/navigation/resetNavigation";
 import { ForgotPasswordParams } from "../ForgotPasswordParams";
 import {
   ForgotPasswordEmailRoute,
-  ForgotPasswordVerificationCodeRoute,
+  ForgotPasswordVerificationRoute,
 } from "../routes";
 
 import ForgotPasswordEmailView from "./ForgotPasswordEmailView";
 
-type ForgotPasswordEmailNavigatorNavigationProp = CompositeNavigationProp<
+type ForgotPasswordEmailNavigationProp = CompositeNavigationProp<
   StackNavigationProp<ForgotPasswordParams, typeof ForgotPasswordEmailRoute>,
   StackNavigationProp<UnprotectedNavigatorParams, typeof ForgotPasswordRoute>
 >;
 
-type ForgotPasswordEmailNavigatorRouteProp = RouteProp<
+type ForgotPasswordEmailRouteProp = RouteProp<
   ForgotPasswordParams,
   typeof ForgotPasswordEmailRoute
 >;
 
-interface ForgotPasswordEmailNavigatorProps {
-  navigation: ForgotPasswordEmailNavigatorNavigationProp;
-  route: ForgotPasswordEmailNavigatorRouteProp;
+interface ForgotPasswordEmailProps {
+  navigation: ForgotPasswordEmailNavigationProp;
+  route: ForgotPasswordEmailRouteProp;
 }
 
-const ForgotPasswordEmailScreen: React.FC<ForgotPasswordEmailNavigatorProps> =
-  ({ navigation }) => {
-    const [loading, setLoading] = useState<boolean>(false);
+const ForgotPasswordEmailScreen: React.FC<ForgotPasswordEmailProps> = ({
+  navigation,
+}) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-    return (
-      <ForgotPasswordEmailView
-        onSignIn={() => resetNavigation(navigation, SignInRoute)}
-        onSubmit={() =>
-          navigation.navigate(ForgotPasswordVerificationCodeRoute)
-        }
-        loading={loading}
-      />
-    );
-  };
+  const onSubmit = useCallback(() => {
+    try {
+      setLoading(true);
+      navigation.navigate(ForgotPasswordVerificationRoute);
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  }, [navigation]);
+
+  return (
+    <ForgotPasswordEmailView
+      onSignIn={() => resetNavigation(navigation, SignInRoute)}
+      onSubmit={onSubmit}
+      loading={loading}
+    />
+  );
+};
 
 export default ForgotPasswordEmailScreen;

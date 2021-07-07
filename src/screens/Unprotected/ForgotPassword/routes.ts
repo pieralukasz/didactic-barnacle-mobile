@@ -1,4 +1,5 @@
 export const ForgotPasswordEmailRoute = "ForgotPasswordEmailRoute";
-export const ForgotPasswordVerificationCodeRoute =
-  "ForgotPasswordVerificationCodeRoute";
+export const ForgotPasswordVerificationRoute =
+  "ForgotPasswordVerificationRoute";
+export const ForgotPasswordResetRoute = "ForgotPasswordResetRoute";
 export const ForgotPasswordSuccessRoute = "ForgotPasswordSuccessRoute";
