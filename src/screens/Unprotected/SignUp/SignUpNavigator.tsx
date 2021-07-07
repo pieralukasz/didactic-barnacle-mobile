@@ -40,15 +40,13 @@ interface SignUpNavigatorProps {
   route: SignUpNavigatorRouteProp;
 }
 
-const SignUpNavigator: React.FC<SignUpNavigatorProps> = () => {
+const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName={SignUpCreateAccountRoute}
       screenOptions={{
         headerShown: false,
-        header: (props) => (
-          <Header onBackButtonPress={() => props.navigation.goBack()} />
-        ),
+        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
       }}
       headerMode="screen">
       <Stack.Screen

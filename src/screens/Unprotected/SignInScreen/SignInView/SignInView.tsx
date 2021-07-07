@@ -33,7 +33,7 @@ const SignInView: React.FC<SignInViewProps> = ({
       <View style={styles.forgotPassword}>
         <Button
           type="text"
-          testId="forgot-password-button"
+          dataTestId="forgot-password-button"
           onPress={onForgotPassword}>
           Forgot Password?
         </Button>
@@ -41,7 +41,7 @@ const SignInView: React.FC<SignInViewProps> = ({
       <View style={styles.signUp}>
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <Text style={styles.signUpText}>Don't have an account?</Text>
-        <Button type="secondary" testId="signup-button" onPress={onSignUp}>
+        <Button type="secondary" dataTestId="sign-up-button" onPress={onSignUp}>
           SIGN UP
         </Button>
       </View>

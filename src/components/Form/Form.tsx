@@ -11,13 +11,13 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({
   children,
-  submitButton: { disabled, onSubmit, text, testId },
+  submitButton: { disabled, onSubmit, text, dataTestId },
 }) => {
   return (
     <View>
       {children}
       <Button
-        testId={testId ?? "form-button"}
+        dataTestId={dataTestId ?? "submit-button"}
         disabled={disabled}
         style={styles.submitButton}
         onPress={onSubmit}>

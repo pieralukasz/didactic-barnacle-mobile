@@ -10,7 +10,7 @@ interface ButtonModeType {
 
 type Props = React.ComponentProps<typeof PaperButton> & {
   type?: "default" | "secondary" | "text";
-  testId?: string;
+  dataTestId?: string;
 };
 
 const Button: React.FC<Props> = (props) => {
@@ -37,7 +37,7 @@ const Button: React.FC<Props> = (props) => {
   return (
     <PaperButton
       {...props}
-      {...attachAccessibilityID(props.testId ?? "button")}
+      {...attachAccessibilityID(props.dataTestId ?? "button")}
       mode={buttonType.mode}
       color={buttonType.color}
       uppercase={buttonType.mode !== "text"}

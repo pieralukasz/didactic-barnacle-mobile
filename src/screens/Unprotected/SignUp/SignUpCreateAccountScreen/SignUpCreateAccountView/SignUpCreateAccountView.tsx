@@ -26,7 +26,7 @@ const SignUpCreateAccountView: React.FC<SignUpCreateAccountViewProps> = ({
       <SignUpCreateAccountForm onSubmit={onSubmit} />
       <View style={styles.signIn}>
         <Text style={styles.signInText}>Already have an account?</Text>
-        <Button type="secondary" testId="signin-button" onPress={onSignIn}>
+        <Button type="secondary" dataTestId="sign-in-button" onPress={onSignIn}>
           Sign in
         </Button>
       </View>

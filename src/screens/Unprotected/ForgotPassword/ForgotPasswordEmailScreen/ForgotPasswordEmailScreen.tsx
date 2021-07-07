@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 
@@ -32,12 +32,15 @@ interface ForgotPasswordEmailNavigatorProps {
 
 const ForgotPasswordEmailScreen: React.FC<ForgotPasswordEmailNavigatorProps> =
   ({ navigation }) => {
+    const [loading, setLoading] = useState<boolean>(false);
+
     return (
       <ForgotPasswordEmailView
         onSignIn={() => resetNavigation(navigation, SignInRoute)}
         onSubmit={() =>
           navigation.navigate(ForgotPasswordVerificationCodeRoute)
         }
+        loading={loading}
       />
     );
   };

@@ -21,7 +21,7 @@ const SignUpVerificationForm: React.FC<SignUpVerificationFormProps> = ({
     formState: { errors, isValid },
   } = useForm<SignUpVerificationFormState>({
     resolver: yupResolver(signUpVerificationFormValidationSchema()),
-    mode: "onTouched",
+    mode: "onChange",
     reValidateMode: "onChange",
   });
 
@@ -29,13 +29,12 @@ const SignUpVerificationForm: React.FC<SignUpVerificationFormProps> = ({
     <Form
       submitButton={{
         text: "Submit",
-        testId: "signup-verification-button",
+        dataTestId: "sign-up-verification-button",
         disabled: !isValid,
         onSubmit: handleSubmit(onSubmit),
       }}>
       <VerificationCodeInputField
         name="verificationCode"
-        testId="signup-verification-code"
         control={control}
         error={errors.verificationCode}
         errorMessage={errors.verificationCode?.message}
