@@ -29,6 +29,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
     <Form
       submitButton={{
         text: "Sign in",
+        dataTestId: "sign-in-button",
         disabled: !isValid,
         onSubmit: handleSubmit(onSubmit),
       }}>
@@ -37,7 +38,6 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         control={control}
         error={errors.email}
         errorMessage={errors.email?.message}
-        autoFocus
       />
       <PasswordInputField
         name="password"

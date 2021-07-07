@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
+import theme from "@themes/defaultTheme";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  subtitle: {
+    fontSize: 16,
+    paddingBottom: theme.spacing.default,
+  },
+  signInButton: {
+    marginTop: theme.spacing.default,
   },
 });
 

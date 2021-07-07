@@ -8,6 +8,8 @@ import {
 export type SignUpNavigatorParams = {
   [SignUpRoute]: undefined;
   [SignUpCreateAccountRoute]: undefined;
-  [SignUpVerificationRoute]: undefined;
+  [SignUpVerificationRoute]: {
+    phoneNumber: string | number;
+  };
   [SignUpSuccessRoute]: undefined;
 };

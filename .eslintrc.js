@@ -32,6 +32,7 @@ module.exports = {
     "react/require-default-props": "off",
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
+    "react/destructuring-assignment": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-namespace": "off",
   },

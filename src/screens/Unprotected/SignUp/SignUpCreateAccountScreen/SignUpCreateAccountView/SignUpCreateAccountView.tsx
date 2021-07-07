@@ -1,24 +1,37 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, Button } from "react-native-paper";
+import { Text } from "react-native-paper";
+import { View } from "react-native";
+
+import ScreenLayout from "@layouts/ScreenLayout";
+import Button from "@components/Button";
+
+import SignUpCreateAccountFormState from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen/SignUpCreateAccountView/SignUpCreateAccountForm/SignUpCreateAccountFormState";
+import SignUpCreateAccountForm from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen/SignUpCreateAccountView/SignUpCreateAccountForm";
+
+import CommonViewProps from "@interfaces/CommonViewProps";
 
 import styles from "./styles";
 
-interface SignUpCreateAccountViewProps {
-  onSubmit: () => void;
+interface SignUpCreateAccountViewProps
+  extends CommonViewProps<SignUpCreateAccountFormState> {
   onSignIn: () => void;
 }
 
 const SignUpCreateAccountView: React.FC<SignUpCreateAccountViewProps> = ({
   onSubmit,
   onSignIn,
+  loading,
 }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>SIGN UP CREATE ACCOUNT VIEW</Text>
-      <Button onPress={onSubmit}>Sign Up</Button>
-      <Button onPress={onSignIn}>Sign In</Button>
-    </SafeAreaView>
+    <ScreenLayout title="Create your account" loading={loading}>
+      <SignUpCreateAccountForm onSubmit={onSubmit} />
+      <View style={styles.signIn}>
+        <Text style={styles.signInText}>Already have an account?</Text>
+        <Button type="secondary" dataTestId="sign-in-button" onPress={onSignIn}>
+          Sign in
+        </Button>
+      </View>
+    </ScreenLayout>
   );
 };
 

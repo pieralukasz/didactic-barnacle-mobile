@@ -13,13 +13,16 @@ import { ForgotPasswordParams } from "@screens/Unprotected/ForgotPassword/Forgot
 
 import {
   ForgotPasswordEmailRoute,
+  ForgotPasswordResetRoute,
   ForgotPasswordSuccessRoute,
-  ForgotPasswordVerificationCodeRoute,
+  ForgotPasswordVerificationRoute,
 } from "@screens/Unprotected/ForgotPassword/routes";
 
 import ForgotPasswordEmailScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordEmailScreen";
-import ForgotPasswordVerificationCodeScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationCodeScreen";
+import ForgotPasswordVerificationScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationScreen";
 import ForgotPasswordSuccessScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordSuccessScreen";
+import ForgotPasswordResetScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordResetScreen";
+import Header from "@components/Header/Header";
 
 const Stack = createStackNavigator<ForgotPasswordParams>();
 
@@ -38,17 +41,30 @@ interface ForgotPasswordNavigatorProps {
   route: ForgotPasswordNavigatorRouteProp;
 }
 
-const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = () => {
+const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
+  navigation,
+}) => {
   return (
-    <Stack.Navigator initialRouteName={ForgotPasswordEmailRoute}>
+    <Stack.Navigator
+      initialRouteName={ForgotPasswordEmailRoute}
+      screenOptions={{
+        headerShown: false,
+        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+      }}
+      headerMode="screen">
       <Stack.Screen
-        options={{ headerShown: false }}
         name={ForgotPasswordEmailRoute}
         component={ForgotPasswordEmailScreen}
       />
       <Stack.Screen
-        name={ForgotPasswordVerificationCodeRoute}
-        component={ForgotPasswordVerificationCodeScreen}
+        options={{ headerShown: true }}
+        name={ForgotPasswordVerificationRoute}
+        component={ForgotPasswordVerificationScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name={ForgotPasswordResetRoute}
+        component={ForgotPasswordResetScreen}
       />
       <Stack.Screen
         name={ForgotPasswordSuccessRoute}

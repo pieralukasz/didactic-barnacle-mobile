@@ -1,9 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { Button } from "react-native-paper";
 
 import FormButton from "@interfaces/FormButton";
 import styles from "@components/Form/styles";
+import Button from "@components/Button";
 
 interface FormProps {
   submitButton: FormButton;
@@ -11,17 +11,17 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({
   children,
-  submitButton: { disabled, onSubmit, text },
+  submitButton: { disabled, onSubmit, text, dataTestId },
 }) => {
   return (
     <View>
       {children}
       <Button
-        mode="outlined"
+        dataTestId={dataTestId ?? "submit-button"}
         disabled={disabled}
         style={styles.submitButton}
         onPress={onSubmit}>
-        {text || "Text"}
+        {text || "Submit"}
       </Button>
     </View>
   );

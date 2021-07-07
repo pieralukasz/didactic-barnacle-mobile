@@ -6,23 +6,27 @@ import {
   ScrollView,
   TextStyle,
   TouchableWithoutFeedback,
-  View,
   ViewStyle,
+  View,
 } from "react-native";
 import { Text } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useHeaderHeight } from "@react-navigation/stack";
 
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
+import useKeyboardStatus from "@hooks/useKeyboardStatus";
+import Title from "@components/Title";
 
 interface ScreenLayoutProps {
   title?: string;
   titleStyles?: TextStyle;
   subtitle?: string;
   subtitleStyles?: TextStyle;
-  scrollView?: boolean;
   viewStyles?: ViewStyle;
   loading?: boolean;
+  scrollEnabled?: boolean;
 }
 
 const ScreenLayout: React.FC<ScreenLayoutProps> = ({
@@ -31,33 +35,41 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   titleStyles,
   subtitle,
   subtitleStyles,
-  scrollView = false,
   viewStyles,
   loading,
+  scrollEnabled = false,
 }) => {
-  const generateTitle = useCallback(() => {
-    if (title) {
-      return <Text style={{ ...styles.title, ...titleStyles }}>{title}</Text>;
-    }
-    return null;
-  }, [title, titleStyles]);
+  const isKeyboardOpen = useKeyboardStatus();
+  const headerHeight = useHeaderHeight();
 
-  const generateSubtitle = useCallback(() => {
-    if (subtitle) {
-      return (
-        <Text style={{ ...styles.subtitle, ...subtitleStyles }}>
-          {subtitle}
-        </Text>
-      );
-    }
-    return null;
-  }, [subtitle, subtitleStyles]);
+  const { bottom, left, right } = useSafeAreaInsets();
+
+  const setTopPadding = useCallback(
+    () =>
+      headerHeight > 0
+        ? Platform.select({
+            android: 4,
+            ios: 8,
+          })
+        : Platform.select({
+            android: 24,
+            ios: 48,
+          }),
+    [headerHeight]
+  );
 
   return (
     <>
       {loading && <FullScreenPreloader visible={loading} />}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <SafeAreaView style={styles.container}>
+        <View
+          style={{
+            ...styles.container,
+            paddingBottom: bottom,
+            paddingLeft: left,
+            paddingTop: setTopPadding(),
+            paddingRight: right,
+          }}>
           <KeyboardAvoidingView
             {...(Platform.OS === "ios"
               ? {
@@ -65,23 +77,28 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
                   keyboardVerticalOffset: 0,
                 }
               : {})}>
-            {scrollView ? (
-              <ScrollView
-                keyboardShouldPersistTaps="handled"
-                style={{ ...styles.view, ...viewStyles }}>
-                {generateTitle()}
-                {generateSubtitle()}
-                {children}
-              </ScrollView>
-            ) : (
-              <View style={{ ...styles.view, ...viewStyles }}>
-                {generateTitle()}
-                {generateSubtitle()}
-                {children}
-              </View>
-            )}
+            <ScrollView
+              scrollEnabled={scrollEnabled || isKeyboardOpen}
+              keyboardShouldPersistTaps="handled"
+              style={{
+                ...styles.view,
+                ...viewStyles,
+                paddingTop: setTopPadding(),
+              }}>
+              {title && (
+                <Title titleStyles={{ ...styles.title, ...titleStyles }}>
+                  {title}
+                </Title>
+              )}
+              {subtitle && (
+                <Text style={{ ...styles.subtitle, ...subtitleStyles }}>
+                  {subtitle}
+                </Text>
+              )}
+              {children}
+            </ScrollView>
           </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
       </TouchableWithoutFeedback>
     </>
   );

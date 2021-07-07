@@ -6,7 +6,7 @@ import {
 } from "@apollo/client";
 import { Auth, Hub } from "aws-amplify";
 // It's dependency of aws-amplify. We don't want install it separately as it could break with different versioning. It's just for type here anyways.
-// eslint-disable-next-line import/no-extraneous-dependencies
+
 import { HubCallback } from "@aws-amplify/core";
 
 import HubEvent from "@enums/HubEvent";

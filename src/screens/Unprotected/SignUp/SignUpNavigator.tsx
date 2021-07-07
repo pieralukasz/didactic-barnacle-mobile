@@ -1,5 +1,4 @@
 import React from "react";
-import { View } from "react-native";
 
 import {
   createStackNavigator,
@@ -14,6 +13,8 @@ import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavi
 import SignUpVerificationScreen from "@screens/Unprotected/SignUp/SignUpVerificationScreen";
 import SignUpSuccessScreen from "@screens/Unprotected/SignUp/SignUpSuccessScreen";
 import SignUpCreateAccountScreen from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen";
+
+import Header from "@components/Header";
 
 import { SignUpNavigatorParams } from "./SignUpNavigatorParams";
 import {
@@ -39,15 +40,23 @@ interface SignUpNavigatorProps {
   route: SignUpNavigatorRouteProp;
 }
 
-const SignUpNavigator: React.FC<SignUpNavigatorProps> = () => {
+const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
   return (
-    <Stack.Navigator initialRouteName={SignUpCreateAccountRoute}>
+    <Stack.Navigator
+      initialRouteName={SignUpCreateAccountRoute}
+      screenOptions={{
+        headerShown: false,
+        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+      }}
+      headerMode="screen">
       <Stack.Screen
-        options={{ headerShown: false }}
         name={SignUpCreateAccountRoute}
         component={SignUpCreateAccountScreen}
       />
       <Stack.Screen
+        options={{
+          headerShown: true,
+        }}
         name={SignUpVerificationRoute}
         component={SignUpVerificationScreen}
       />

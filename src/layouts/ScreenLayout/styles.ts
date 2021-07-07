@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 32,
     marginVertical: 32,
   },
   subtitle: {

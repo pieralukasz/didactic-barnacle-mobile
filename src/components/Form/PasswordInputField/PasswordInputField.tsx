@@ -1,41 +1,59 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Control, FieldError, FieldValues, Path } from "react-hook-form";
 
 import TextInputField from "@components/Form/TextInputField";
 import PasswordIcon from "@assets/icons/PasswordIcon.svg";
+import PasswordInvisibleIcon from "@assets/icons/PasswordInvisibleIcon.svg";
+import PasswordVisibilityIcon from "@assets/icons/PasswordVisibleIcon.svg";
 
 interface Props<T extends FieldValues> {
-  name: Path<T>;
+  autoFocus?: boolean;
   control: Control<T>;
+  dataTestId?: string;
+  disabled?: boolean;
   error?: FieldError;
   errorMessage?: string;
-  autoFocus?: boolean;
-  placeholder?: string;
   label?: string;
-  disabled?: boolean;
+  name: Path<T>;
+  placeholder?: string;
+  showVisibility?: boolean;
 }
 
 const PasswordInputField = <T extends FieldValues>({
-  name,
+  autoFocus,
+  control,
+  dataTestId = "password-input-field",
+  disabled,
   error,
   errorMessage,
-  control,
-  autoFocus,
-  disabled,
-  placeholder = "Password",
   label = "Password",
-}: Props<T>): JSX.Element => (
-  <TextInputField
-    name={name}
-    control={control}
-    error={!!error}
-    errorMessage={errorMessage}
-    label={label}
-    placeHolder={placeholder}
-    disabled={disabled}
-    autoFocus={autoFocus}
-    leftIcon={<PasswordIcon />}
-  />
-);
+  name,
+  placeholder = "Password",
+  showVisibility = true,
+}: Props<T>): JSX.Element => {
+  const [visibility, setVisibility] = useState<boolean>(true);
+
+  const renderEyeIcon = useCallback(() => {
+    return visibility ? <PasswordVisibilityIcon /> : <PasswordInvisibleIcon />;
+  }, [visibility]);
+
+  return (
+    <TextInputField
+      autoFocus={autoFocus}
+      control={control}
+      dataTestId={dataTestId}
+      disabled={disabled}
+      error={!!error}
+      errorMessage={errorMessage}
+      label={label}
+      leftIcon={<PasswordIcon />}
+      name={name}
+      onPressRightIcon={() => setVisibility(!visibility)}
+      placeHolder={placeholder}
+      rightIcon={showVisibility ? renderEyeIcon() : undefined}
+      secureTextEntry={visibility}
+    />
+  );
+};
 
 export default PasswordInputField;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
@@ -13,6 +13,7 @@ import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavi
 import resetNavigation from "@utils/navigation/resetNavigation";
 
 import SignUpCreateAccountView from "./SignUpCreateAccountView";
+import SignUpCreateAccountFormState from "./SignUpCreateAccountView/SignUpCreateAccountForm/SignUpCreateAccountFormState";
 
 type SignUpCreateAccountNavigationProp = CompositeNavigationProp<
   StackNavigationProp<SignUpNavigatorParams, typeof SignUpCreateAccountRoute>,
@@ -32,9 +33,27 @@ interface SignUpCreateAccountProps {
 const SignUpCreateAccountScreen: React.FC<SignUpCreateAccountProps> = ({
   navigation,
 }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const onSignUp = useCallback(
+    (data: SignUpCreateAccountFormState) => {
+      try {
+        setLoading(true);
+        navigation.navigate(SignUpVerificationRoute, {
+          phoneNumber: data.phoneNumber,
+        });
+        setLoading(false);
+      } catch {
+        setLoading(false);
+      }
+    },
+    [navigation]
+  );
+
   return (
     <SignUpCreateAccountView
-      onSubmit={() => navigation.navigate(SignUpVerificationRoute)}
+      onSubmit={onSignUp}
+      loading={loading}
       onSignIn={() => resetNavigation(navigation, SignInRoute)}
     />
   );
