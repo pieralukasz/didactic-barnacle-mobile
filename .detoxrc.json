@@ -1,6 +1,6 @@
 {
   "testRunner": "jest",
-  "runnerConfig": "detox/config.json",
+  "runnerConfig": "detox/jest.config.json",
   "apps": {
     "ios": {
       "type": "ios.app",
@@ -9,7 +9,8 @@
     },
     "android": {
       "type": "android.apk",
-      "binaryPath": "SPECIFY_PATH_TO_YOUR_APP_BINARY"
+      "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "build": "yarn android"
     }
   },
   "devices": {
