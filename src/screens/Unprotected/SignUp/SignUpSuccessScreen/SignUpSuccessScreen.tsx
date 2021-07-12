@@ -8,7 +8,7 @@ import { SignUpNavigatorParams } from "@screens/Unprotected/SignUp/SignUpNavigat
 import { SignUpSuccessRoute } from "@screens/Unprotected/SignUp/routes";
 import { SignInRoute } from "@screens/Unprotected/routes";
 
-import resetNavigation from "@utils/navigation/resetNavigation";
+import useResetNavigation from "@hooks/useResetNavigation";
 
 type SignUpSuccessNavigationProp = StackNavigationProp<
   SignUpNavigatorParams,
@@ -25,12 +25,14 @@ interface SignUpSuccessProps {
   route: SignUpSuccessRouteProp;
 }
 
-const SignUpSuccessScreen: React.FC<SignUpSuccessProps> = ({ navigation }) => {
+const SignUpSuccessScreen: React.FC<SignUpSuccessProps> = () => {
+  const resetNavigation = useResetNavigation();
+
   return (
     <SuccessScreen
       title="Successfully verified"
       submitButton={{
-        onSubmit: () => resetNavigation(navigation, SignInRoute),
+        onSubmit: () => resetNavigation(SignInRoute),
         text: "Go to sign in",
         dataTestId: "sign-in-button",
       }}

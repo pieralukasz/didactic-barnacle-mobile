@@ -23,10 +23,7 @@ const SignInView: React.FC<SignInViewProps> = ({
   loading,
 }) => {
   return (
-    <ScreenLayout
-      title="Sign In"
-      loading={loading}
-      viewStyles={styles.container}>
+    <ScreenLayout title="Sign In" loading={loading}>
       <SignInForm onSubmit={onSubmit} />
       <View style={styles.forgotPassword}>
         <Button

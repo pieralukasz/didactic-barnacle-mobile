@@ -29,8 +29,9 @@ const SignUpVerificationScreen: React.FC<SignUpVerificationProps> = ({
   navigation,
   route,
 }) => {
-  const { phoneNumber } = route.params;
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { phoneNumber } = route.params;
 
   const onVerifyCode = useCallback(
     (data: SignUpVerificationFormState) => {
