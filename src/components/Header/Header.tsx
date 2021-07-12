@@ -1,6 +1,8 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Platform, View } from "react-native";
 import { IconButton } from "react-native-paper";
+
+import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import attachAccessibilityID from "@utils/attachAccessibilityID";
@@ -9,12 +11,16 @@ import ArrowLeft from "@assets/icons/ArrowLeftIcon.svg";
 
 import styles from "./styles";
 
-interface Props {
-  onBackButtonPress: () => void;
-}
-
-const Header: React.FC<Props> = ({ onBackButtonPress }) => {
+const Header: React.FC = () => {
+  const navigation = useNavigation();
   const { left, top, right, bottom } = useSafeAreaInsets();
+
+  const backButtonPress = useCallback(() => {
+    if (!navigation) {
+      return;
+    }
+    navigation.goBack();
+  }, [navigation]);
 
   return (
     <View
@@ -30,7 +36,7 @@ const Header: React.FC<Props> = ({ onBackButtonPress }) => {
       }}>
       <IconButton
         {...attachAccessibilityID("back-button")}
-        onPress={onBackButtonPress}
+        onPress={backButtonPress}
         icon={ArrowLeft}
       />
     </View>
