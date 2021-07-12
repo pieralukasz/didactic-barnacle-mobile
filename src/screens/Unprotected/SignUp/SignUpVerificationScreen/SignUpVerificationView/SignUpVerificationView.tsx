@@ -38,7 +38,7 @@ const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
       </View>
       <SignUpVerificationForm onSubmit={onSubmit} />
       <Button
-        {...attachAccessibilityID("sign-up-resend-button")}
+        {...attachAccessibilityID("resend-email-button")}
         mode="outlined"
         onPress={onResendCode}
         style={styles.resendButton}>
