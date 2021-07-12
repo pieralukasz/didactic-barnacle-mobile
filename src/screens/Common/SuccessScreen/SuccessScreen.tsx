@@ -1,12 +1,11 @@
 import React from "react";
+import { Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Success from "@assets/images/Success.svg";
-
-import Title from "@components/Title";
-import Button from "@components/Button";
-
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import FormButton from "@interfaces/FormButton";
+import Success from "@assets/images/Success.svg";
+import Title from "@components/Title";
 
 import styles from "./styles";
 
@@ -24,9 +23,10 @@ const SuccessScreen: React.FC<SuccessScreenProps> = ({
       <Success />
       <Title titleStyles={styles.title}>{title}</Title>
       <Button
+        {...attachAccessibilityID(dataTestId)}
+        mode="contained"
         style={styles.button}
         onPress={onSubmit}
-        dataTestId={dataTestId}
         disabled={disabled}>
         {text}
       </Button>

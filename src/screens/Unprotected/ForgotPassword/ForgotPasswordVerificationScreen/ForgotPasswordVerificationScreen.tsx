@@ -39,10 +39,10 @@ const ForgotPasswordVerificationScreen: React.FC<ForgotPasswordVerificationProps
       }
     }, [navigation]);
 
-    const onResentCode = useCallback(() => {
+    const onResendCode = useCallback(() => {
       try {
         setLoading(true);
-        console.log("RESENT CODE");
+        console.log("RESEND CODE");
         setLoading(false);
       } catch {
         setLoading(false);
@@ -52,7 +52,7 @@ const ForgotPasswordVerificationScreen: React.FC<ForgotPasswordVerificationProps
     return (
       <ForgotPasswordVerificationView
         onSubmit={onSubmit}
-        onResentCode={onResentCode}
+        onResendCode={onResendCode}
         loading={loading}
         phoneNumber="+48 3213123213"
       />

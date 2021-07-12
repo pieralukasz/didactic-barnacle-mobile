@@ -1,11 +1,11 @@
 import React, { memo } from "react";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
+
 import { IconButton } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import attachAccessibilityID from "@utils/attachAccessibilityID";
-
 import ArrowLeft from "@assets/icons/ArrowLeftIcon.svg";
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 
 import styles from "./styles";
 
@@ -14,25 +14,21 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ onBackButtonPress }) => {
-  const { left, top, right, bottom } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
 
   return (
     <View
       style={{
-        paddingLeft: left + 6,
-        paddingTop: Platform.select({
-          android: top + 12,
-          ios: top,
-        }),
-        paddingRight: right,
-        paddingBottom: bottom,
+        paddingTop: top,
         ...styles.header,
       }}>
-      <IconButton
-        {...attachAccessibilityID("back-button")}
-        onPress={onBackButtonPress}
-        icon={ArrowLeft}
-      />
+      <View style={styles.headerInner}>
+        <IconButton
+          {...attachAccessibilityID("back-button")}
+          onPress={onBackButtonPress}
+          icon={ArrowLeft}
+        />
+      </View>
     </View>
   );
 };
