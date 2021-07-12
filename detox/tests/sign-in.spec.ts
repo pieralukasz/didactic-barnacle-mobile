@@ -1,4 +1,8 @@
 import { by, device, expect, element } from "detox";
+import { createRandomUser } from "..//page-objects/generate-data";
+import { signInSelectors } from "../page-objects/selectors/sign-in-page";
+
+const newUser = createRandomUser();
 
 describe("Sign in page test suite", () => {
   beforeAll(async () => {
@@ -6,11 +10,15 @@ describe("Sign in page test suite", () => {
   });
 
   it("User is able to fill the sign in form", async () => {
-    await element(by.id("email-input-field")).tap();
-    await element(by.id("email-input-field")).typeText("test@example.com");
-    await element(by.id("password-input-field")).tap();
-    await element(by.id("password-input-field")).typeText("Password1234");
-    await element(by.id("sign-in-button")).tap();
-    await expect(element(by.id("sign-in-button"))).toBeVisible();
+    await element(by.id(signInSelectors.emailInput)).tap();
+    await element(by.id(signInSelectors.emailInput)).typeText(
+      newUser.correctEmail
+    );
+    await element(by.id(signInSelectors.passwordInput)).tap();
+    await element(by.id(signInSelectors.passwordInput)).typeText(
+      newUser.correctPassword
+    );
+    await element(by.id(signInSelectors.signInButton)).tap();
+    await expect(element(by.id(signInSelectors.signInButton))).toBeVisible();
   });
 });

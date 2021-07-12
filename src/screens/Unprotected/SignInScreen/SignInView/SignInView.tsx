@@ -41,7 +41,10 @@ const SignInView: React.FC<SignInViewProps> = ({
       <View style={styles.signUp}>
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <Text style={styles.signUpText}>Don't have an account?</Text>
-        <Button type="secondary" dataTestId="sign-up-button" onPress={onSignUp}>
+        <Button
+          type="secondary"
+          dataTestId="go-to-sign-up-page-button"
+          onPress={onSignUp}>
           SIGN UP
         </Button>
       </View>
