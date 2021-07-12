@@ -42,15 +42,13 @@ interface ForgotPasswordNavigatorProps {
   route: ForgotPasswordNavigatorRouteProp;
 }
 
-const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
-  navigation,
-}) => {
+const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = () => {
   return (
     <Stack.Navigator
       initialRouteName={ForgotPasswordEmailRoute}
       screenOptions={{
-        headerShown: false,
-        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+        headerShown: true,
+        header: () => <Header />,
       }}
       headerMode="screen">
       <Stack.Screen
@@ -58,16 +56,17 @@ const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
         component={ForgotPasswordEmailScreen}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
         name={ForgotPasswordVerificationRoute}
         component={ForgotPasswordVerificationScreen}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
         name={ForgotPasswordResetRoute}
         component={ForgotPasswordResetScreen}
       />
       <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
         name={ForgotPasswordSuccessRoute}
         component={ForgotPasswordSuccessScreen}
       />

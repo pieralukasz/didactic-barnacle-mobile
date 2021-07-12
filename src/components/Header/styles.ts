@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 6,
   },
+  headerEmpty: {
+    height: 48,
+  },
 });
 
 export default styles;

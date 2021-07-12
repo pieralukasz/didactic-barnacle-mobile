@@ -40,13 +40,13 @@ interface SignUpNavigatorProps {
   route: SignUpNavigatorRouteProp;
 }
 
-const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
+const SignUpNavigator: React.FC<SignUpNavigatorProps> = () => {
   return (
     <Stack.Navigator
       initialRouteName={SignUpCreateAccountRoute}
       screenOptions={{
-        headerShown: false,
-        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+        headerShown: true,
+        header: () => <Header />,
       }}
       headerMode="screen">
       <Stack.Screen
@@ -54,13 +54,16 @@ const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
         component={SignUpCreateAccountScreen}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-        }}
         name={SignUpVerificationRoute}
         component={SignUpVerificationScreen}
       />
-      <Stack.Screen name={SignUpSuccessRoute} component={SignUpSuccessScreen} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={SignUpSuccessRoute}
+        component={SignUpSuccessScreen}
+      />
     </Stack.Navigator>
   );
 };
