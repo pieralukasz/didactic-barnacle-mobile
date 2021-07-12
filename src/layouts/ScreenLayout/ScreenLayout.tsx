@@ -43,19 +43,10 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   const isKeyboardOpen = useKeyboardStatus();
   const headerHeight = useHeaderHeight();
 
-  const { bottom, left, right, top } = useSafeAreaInsets();
+  const { bottom, left, right } = useSafeAreaInsets();
 
   const setTopPadding = useCallback(
-    () =>
-      headerHeight > 0
-        ? Platform.select({
-            android: 4,
-            ios: 8,
-          })
-        : Platform.select({
-            android: 24,
-            ios: 48,
-          }),
+    () => (headerHeight > 0 ? 0 : 24),
     [headerHeight]
   );
 
