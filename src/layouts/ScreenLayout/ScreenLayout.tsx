@@ -36,7 +36,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   subtitle,
   subtitleStyles,
   viewStyles,
-  loading,
+  loading = false,
   scrollEnabled = false,
 }) => {
   const isKeyboardOpen = useKeyboardStatus();
