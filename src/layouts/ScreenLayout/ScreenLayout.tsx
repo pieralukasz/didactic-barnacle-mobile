@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   ViewStyle,
   View,
+  Pressable,
 } from "react-native";
 import { Text } from "react-native-paper";
 
@@ -42,7 +43,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   const isKeyboardOpen = useKeyboardStatus();
   const headerHeight = useHeaderHeight();
 
-  const { bottom, left, right } = useSafeAreaInsets();
+  const { bottom, left, right, top } = useSafeAreaInsets();
 
   const setTopPadding = useCallback(
     () =>
@@ -61,10 +62,9 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   return (
     <>
       {loading && <FullScreenPreloader visible={loading} />}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <Pressable onPress={Keyboard.dismiss} accessible={false}>
         <View
           style={{
-            ...styles.container,
             paddingBottom: bottom,
             paddingLeft: left,
             paddingTop: setTopPadding(),
@@ -99,7 +99,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
             </ScrollView>
           </KeyboardAvoidingView>
         </View>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </>
   );
 };

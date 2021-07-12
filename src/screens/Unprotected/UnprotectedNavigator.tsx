@@ -5,6 +5,8 @@ import {
 } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
+import Header from "@components/Header";
+
 import SignInScreen from "@screens/Unprotected/SignInScreen";
 import SignUpNavigator from "@screens/Unprotected/SignUp/SignUpNavigator";
 
@@ -39,10 +41,15 @@ const UnprotectedNavigator: React.FC<UnprotectedNavigatorProps> = () => {
   return (
     <Stack.Navigator
       initialRouteName={SignInRoute}
-      screenOptions={{ headerShown: false }}>
+      screenOptions={{ headerShown: true, header: () => <Header /> }}>
       <Stack.Screen name={SignInRoute} component={SignInScreen} />
-      <Stack.Screen name={SignUpRoute} component={SignUpNavigator} />
       <Stack.Screen
+        options={{ headerShown: false }}
+        name={SignUpRoute}
+        component={SignUpNavigator}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
         name={ForgotPasswordRoute}
         component={ForgotPasswordNavigator}
       />

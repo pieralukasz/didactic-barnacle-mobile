@@ -1,13 +1,12 @@
 import React from "react";
-import { Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 
-import ScreenLayout from "@layouts/ScreenLayout";
-import Button from "@components/Button";
-
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import CommonViewProps from "@interfaces/CommonViewProps";
-import ForgotPasswordEmailState from "./ForgotPasswordEmailForm/ForgotPasswordEmailState";
-import ForgotPasswordEmailForm from "./ForgotPasswordEmailForm";
+import ScreenLayout from "@layouts/ScreenLayout";
 
+import ForgotPasswordEmailForm from "./ForgotPasswordEmailForm";
+import ForgotPasswordEmailState from "./ForgotPasswordEmailForm/ForgotPasswordEmailState";
 import styles from "./styles";
 
 interface ForgotPasswordEmailViewProps
@@ -28,9 +27,9 @@ const ForgotPasswordEmailView: React.FC<ForgotPasswordEmailViewProps> = ({
       </Text>
       <ForgotPasswordEmailForm onSubmit={onSubmit} />
       <Button
+        {...attachAccessibilityID("sign-in-button")}
         style={styles.signInButton}
-        type="secondary"
-        dataTestId="sign-in-button"
+        mode="outlined"
         onPress={onSignIn}>
         Back to sign in page
       </Button>

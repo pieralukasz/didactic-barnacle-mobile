@@ -49,7 +49,7 @@ const SignUpVerificationScreen: React.FC<SignUpVerificationProps> = ({
   return (
     <SignUpVerificationView
       onSubmit={onVerifyCode}
-      onResentCode={() => {}}
+      onResendCode={() => {}}
       loading={loading}
       phoneNumber={phoneNumber}
     />

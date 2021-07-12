@@ -102,6 +102,9 @@
       "json",
       "node"
     ],
+    "modulePathIgnorePatterns": [
+      "detox"
+    ],
     "resetMocks": false,
     "moduleNameMapper": {
       "@assets/(.*)": "<rootDir>/src/assets/$1",
@@ -121,12 +124,19 @@
     "setupFiles": [
       "./src/setupTests.ts"
     ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/index.ts",
+      "!src/**/*Params.ts",
+      "!src/**/*State.ts",
+      "!src/types/**/*.ts"
+    ],
     "coverageThreshold": {
       "global": {
-        "branches": 10,
-        "functions": 10,
-        "lines": 10,
-        "statements": 10
+        "branches": 1,
+        "functions": 1,
+        "lines": 1,
+        "statements": 1
       }
     }
   }

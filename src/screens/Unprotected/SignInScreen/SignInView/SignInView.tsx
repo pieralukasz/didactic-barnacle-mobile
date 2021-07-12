@@ -1,16 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 
-import { Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 
-import ScreenLayout from "@layouts/ScreenLayout";
-import Button from "@components/Button";
-import SignInForm from "@screens/Unprotected/SignInScreen/SignInView/SignInForm";
-
-import SignInFormState from "@screens/Unprotected/SignInScreen/SignInView/SignInForm/SignInFormState";
-
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import CommonViewProps from "@interfaces/CommonViewProps";
+import ScreenLayout from "@layouts/ScreenLayout";
 
+import SignInForm from "./SignInForm";
+import SignInFormState from "./SignInForm/SignInFormState";
 import styles from "./styles";
 
 interface SignInViewProps extends CommonViewProps<SignInFormState> {
@@ -32,8 +30,8 @@ const SignInView: React.FC<SignInViewProps> = ({
       <SignInForm onSubmit={onSubmit} />
       <View style={styles.forgotPassword}>
         <Button
-          type="text"
-          dataTestId="forgot-password-button"
+          {...attachAccessibilityID("forgot-password-button")}
+          mode="text"
           onPress={onForgotPassword}>
           Forgot Password?
         </Button>
@@ -41,7 +39,10 @@ const SignInView: React.FC<SignInViewProps> = ({
       <View style={styles.signUp}>
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <Text style={styles.signUpText}>Don't have an account?</Text>
-        <Button type="secondary" dataTestId="sign-up-button" onPress={onSignUp}>
+        <Button
+          {...attachAccessibilityID("sign-up-button")}
+          mode="outlined"
+          onPress={onSignUp}>
           SIGN UP
         </Button>
       </View>
