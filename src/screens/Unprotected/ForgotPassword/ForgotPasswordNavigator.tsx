@@ -6,6 +6,8 @@ import {
 } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
+import Header from "@components/Header/Header";
+
 import { ForgotPasswordRoute } from "@screens/Unprotected/routes";
 
 import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
@@ -22,7 +24,6 @@ import ForgotPasswordEmailScreen from "@screens/Unprotected/ForgotPassword/Forgo
 import ForgotPasswordVerificationScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationScreen";
 import ForgotPasswordSuccessScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordSuccessScreen";
 import ForgotPasswordResetScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordResetScreen";
-import Header from "@components/Header/Header";
 
 const Stack = createStackNavigator<ForgotPasswordParams>();
 

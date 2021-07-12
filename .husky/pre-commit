@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Run prettier before the commit
-yarn lint && yarn types-check && yarn prettier-check
+yarn format && yarn format-check && yarn types-check
