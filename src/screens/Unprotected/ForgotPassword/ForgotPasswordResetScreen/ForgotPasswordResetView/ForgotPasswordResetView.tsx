@@ -1,13 +1,12 @@
 import React from "react";
-import { Text } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import CommonViewProps from "@interfaces/CommonViewProps";
 import ScreenLayout from "@layouts/ScreenLayout";
-import Button from "@components/Button";
 
-import ForgotPasswordResetFormState from "./ForgotPasswordResetForm/ForgotPasswordResetFormState";
 import ForgotPasswordResetForm from "./ForgotPasswordResetForm";
-
+import ForgotPasswordResetFormState from "./ForgotPasswordResetForm/ForgotPasswordResetFormState";
 import styles from "./styles";
 
 interface ForgotPasswordResetViewProps
@@ -28,8 +27,8 @@ const ForgotPasswordResetView: React.FC<ForgotPasswordResetViewProps> = ({
       </Text>
       <ForgotPasswordResetForm onSubmit={onSubmit} />
       <Button
-        type="secondary"
-        dataTestId="cancel-button"
+        {...attachAccessibilityID("cancel-button")}
+        mode="outlined"
         onPress={onCancel}
         style={styles.cancelButton}>
         Cancel

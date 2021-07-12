@@ -1,11 +1,10 @@
 import React from "react";
 
+import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import {
   createStackNavigator,
   StackNavigationProp,
 } from "@react-navigation/stack";
-
-import { RouteProp } from "@react-navigation/native";
 
 import { SignUpRoute } from "@screens/Unprotected/routes";
 
@@ -16,6 +15,7 @@ import SignUpCreateAccountScreen from "@screens/Unprotected/SignUp/SignUpCreateA
 
 import Header from "@components/Header";
 
+import { MainNavigatorParams } from "@screens/MainNavigatorParams";
 import { SignUpNavigatorParams } from "./SignUpNavigatorParams";
 import {
   SignUpCreateAccountRoute,
@@ -25,9 +25,9 @@ import {
 
 const Stack = createStackNavigator<SignUpNavigatorParams>();
 
-type SignUpNavigatorNavigationProp = StackNavigationProp<
-  UnprotectedNavigatorParams,
-  typeof SignUpRoute
+type SignUpNavigatorNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<UnprotectedNavigatorParams, typeof SignUpRoute>,
+  StackNavigationProp<MainNavigatorParams>
 >;
 
 type SignUpNavigatorRouteProp = RouteProp<
@@ -40,13 +40,13 @@ interface SignUpNavigatorProps {
   route: SignUpNavigatorRouteProp;
 }
 
-const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
+const SignUpNavigator: React.FC<SignUpNavigatorProps> = () => {
   return (
     <Stack.Navigator
       initialRouteName={SignUpCreateAccountRoute}
       screenOptions={{
-        headerShown: false,
-        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+        headerShown: true,
+        header: () => <Header />,
       }}
       headerMode="screen">
       <Stack.Screen
@@ -54,13 +54,16 @@ const SignUpNavigator: React.FC<SignUpNavigatorProps> = ({ navigation }) => {
         component={SignUpCreateAccountScreen}
       />
       <Stack.Screen
-        options={{
-          headerShown: true,
-        }}
         name={SignUpVerificationRoute}
         component={SignUpVerificationScreen}
       />
-      <Stack.Screen name={SignUpSuccessRoute} component={SignUpSuccessScreen} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={SignUpSuccessRoute}
+        component={SignUpSuccessScreen}
+      />
     </Stack.Navigator>
   );
 };

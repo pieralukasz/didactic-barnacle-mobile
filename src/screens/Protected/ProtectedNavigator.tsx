@@ -7,11 +7,15 @@ import {
 } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
+import Header from "@components/Header";
+
 import useUserContext from "@features/User/useUserContext";
 
 import { MainNavigatorParams } from "@screens/MainNavigatorParams";
 import { testProtectedRoute } from "@screens/Protected/routes";
 import { ProtectedRoute, UnprotectedRoute } from "@screens/routes";
+
+import useResetNavigation from "@hooks/useResetNavigation";
 
 import { ProtectedNavigatorParams } from "./ProtectedNavigatorParams";
 
@@ -35,24 +39,24 @@ interface ProtectedNavigatorProps {
 const ProtectedNavigator: React.FC<ProtectedNavigatorProps> = ({
   navigation,
 }) => {
+  const resetNavigation = useResetNavigation();
   const { user } = useUserContext();
 
   useEffect(() => {
     if (user === null) {
-      navigation.reset({
-        ...navigation,
-        routes: [
-          {
-            name: UnprotectedRoute,
-          },
-        ],
-      });
+      resetNavigation(UnprotectedRoute);
     }
-  }, [navigation, user]);
+  }, [navigation, resetNavigation, user]);
 
   return (
-    <Stack.Navigator initialRouteName={ProtectedRoute}>
-      <Stack.Screen name={testProtectedRoute} component={View} />
+    <Stack.Navigator
+      initialRouteName={ProtectedRoute}
+      screenOptions={{ headerShown: true, header: () => <Header /> }}>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name={testProtectedRoute}
+        component={View}
+      />
     </Stack.Navigator>
   );
 };

@@ -1,18 +1,17 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   TextStyle,
-  TouchableWithoutFeedback,
   ViewStyle,
   View,
+  Pressable,
 } from "react-native";
 import { Text } from "react-native-paper";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useHeaderHeight } from "@react-navigation/stack";
 
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
@@ -36,38 +35,21 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   subtitle,
   subtitleStyles,
   viewStyles,
-  loading,
+  loading = false,
   scrollEnabled = false,
 }) => {
   const isKeyboardOpen = useKeyboardStatus();
-  const headerHeight = useHeaderHeight();
 
   const { bottom, left, right } = useSafeAreaInsets();
-
-  const setTopPadding = useCallback(
-    () =>
-      headerHeight > 0
-        ? Platform.select({
-            android: 4,
-            ios: 8,
-          })
-        : Platform.select({
-            android: 24,
-            ios: 48,
-          }),
-    [headerHeight]
-  );
 
   return (
     <>
       {loading && <FullScreenPreloader visible={loading} />}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <Pressable onPress={Keyboard.dismiss} accessible={false}>
         <View
           style={{
-            ...styles.container,
             paddingBottom: bottom,
             paddingLeft: left,
-            paddingTop: setTopPadding(),
             paddingRight: right,
           }}>
           <KeyboardAvoidingView
@@ -83,7 +65,6 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
               style={{
                 ...styles.view,
                 ...viewStyles,
-                paddingTop: setTopPadding(),
               }}>
               {title && (
                 <Title titleStyles={{ ...styles.title, ...titleStyles }}>
@@ -99,7 +80,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
             </ScrollView>
           </KeyboardAvoidingView>
         </View>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </>
   );
 };

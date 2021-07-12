@@ -3,7 +3,7 @@ import {
   SignUpCreateAccountRoute,
   SignUpSuccessRoute,
   SignUpVerificationRoute,
-} from "@screens/Unprotected/SignUp/routes";
+} from "./routes";
 
 export type SignUpNavigatorParams = {
   [SignUpRoute]: undefined;

@@ -1,15 +1,17 @@
 import React from "react";
 
+import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import {
   createStackNavigator,
   StackNavigationProp,
 } from "@react-navigation/stack";
-import { RouteProp } from "@react-navigation/native";
 
-import { ForgotPasswordRoute } from "@screens/Unprotected/routes";
+import Header from "@components/Header/Header";
 
-import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
 import { ForgotPasswordParams } from "@screens/Unprotected/ForgotPassword/ForgotPasswordParams";
+import { ForgotPasswordRoute } from "@screens/Unprotected/routes";
+import { MainNavigatorParams } from "@screens/MainNavigatorParams";
+import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
 
 import {
   ForgotPasswordEmailRoute,
@@ -22,13 +24,12 @@ import ForgotPasswordEmailScreen from "@screens/Unprotected/ForgotPassword/Forgo
 import ForgotPasswordVerificationScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordVerificationScreen";
 import ForgotPasswordSuccessScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordSuccessScreen";
 import ForgotPasswordResetScreen from "@screens/Unprotected/ForgotPassword/ForgotPasswordResetScreen";
-import Header from "@components/Header/Header";
 
 const Stack = createStackNavigator<ForgotPasswordParams>();
 
-type ForgotPasswordNavigatorNavigationProp = StackNavigationProp<
-  UnprotectedNavigatorParams,
-  typeof ForgotPasswordRoute
+type ForgotPasswordNavigatorNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<UnprotectedNavigatorParams, typeof ForgotPasswordRoute>,
+  StackNavigationProp<MainNavigatorParams>
 >;
 
 type ForgotPasswordNavigatorRouteProp = RouteProp<
@@ -41,15 +42,13 @@ interface ForgotPasswordNavigatorProps {
   route: ForgotPasswordNavigatorRouteProp;
 }
 
-const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
-  navigation,
-}) => {
+const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = () => {
   return (
     <Stack.Navigator
       initialRouteName={ForgotPasswordEmailRoute}
       screenOptions={{
-        headerShown: false,
-        header: () => <Header onBackButtonPress={() => navigation.goBack()} />,
+        headerShown: true,
+        header: () => <Header />,
       }}
       headerMode="screen">
       <Stack.Screen
@@ -57,16 +56,17 @@ const ForgotPasswordNavigator: React.FC<ForgotPasswordNavigatorProps> = ({
         component={ForgotPasswordEmailScreen}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
         name={ForgotPasswordVerificationRoute}
         component={ForgotPasswordVerificationScreen}
       />
       <Stack.Screen
-        options={{ headerShown: true }}
         name={ForgotPasswordResetRoute}
         component={ForgotPasswordResetScreen}
       />
       <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
         name={ForgotPasswordSuccessRoute}
         component={ForgotPasswordSuccessScreen}
       />
