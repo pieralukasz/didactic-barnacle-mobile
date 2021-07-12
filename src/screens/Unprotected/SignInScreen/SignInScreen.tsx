@@ -11,7 +11,7 @@ import {
 } from "@screens/Unprotected/routes";
 import { MainNavigatorParams } from "@screens/MainNavigatorParams";
 import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
-import resetNavigation from "@utils/navigation/resetNavigation";
+import useResetNavigation from "@hooks/useResetNavigation";
 
 import SignInView from "./SignInView";
 
@@ -30,7 +30,9 @@ interface SignInProps {
   route: SignInRouteProp;
 }
 
-const SignInScreen: React.FC<SignInProps> = ({ navigation }) => {
+const SignInScreen: React.FC<SignInProps> = () => {
+  const resetNavigation = useResetNavigation();
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSignIn = useCallback((data: SignInFormState) => {
@@ -45,8 +47,8 @@ const SignInScreen: React.FC<SignInProps> = ({ navigation }) => {
 
   return (
     <SignInView
-      onSignUp={() => resetNavigation(navigation, SignUpRoute)}
-      onForgotPassword={() => resetNavigation(navigation, ForgotPasswordRoute)}
+      onSignUp={() => resetNavigation(SignUpRoute)}
+      onForgotPassword={() => resetNavigation(ForgotPasswordRoute)}
       onSubmit={onSignIn}
       loading={loading}
     />

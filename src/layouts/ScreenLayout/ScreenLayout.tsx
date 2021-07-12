@@ -1,11 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   TextStyle,
-  TouchableWithoutFeedback,
   ViewStyle,
   View,
   Pressable,
@@ -13,7 +12,6 @@ import {
 import { Text } from "react-native-paper";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useHeaderHeight } from "@react-navigation/stack";
 
 import styles from "@layouts/ScreenLayout/styles";
 import FullScreenPreloader from "@components/FullScreenPreloader/FullScreenPreloader";
@@ -41,14 +39,8 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   scrollEnabled = false,
 }) => {
   const isKeyboardOpen = useKeyboardStatus();
-  const headerHeight = useHeaderHeight();
 
   const { bottom, left, right } = useSafeAreaInsets();
-
-  const setTopPadding = useCallback(
-    () => (headerHeight > 0 ? 0 : 24),
-    [headerHeight]
-  );
 
   return (
     <>
@@ -58,7 +50,6 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
           style={{
             paddingBottom: bottom,
             paddingLeft: left,
-            paddingTop: setTopPadding(),
             paddingRight: right,
           }}>
           <KeyboardAvoidingView
@@ -74,7 +65,6 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
               style={{
                 ...styles.view,
                 ...viewStyles,
-                paddingTop: setTopPadding(),
               }}>
               {title && (
                 <Title titleStyles={{ ...styles.title, ...titleStyles }}>

@@ -10,7 +10,8 @@ import {
 
 import { SignInRoute, SignUpRoute } from "@screens/Unprotected/routes";
 import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
-import resetNavigation from "@utils/navigation/resetNavigation";
+
+import useResetNavigation from "@hooks/useResetNavigation";
 
 import SignUpCreateAccountView from "./SignUpCreateAccountView";
 import SignUpCreateAccountFormState from "./SignUpCreateAccountView/SignUpCreateAccountForm/SignUpCreateAccountFormState";
@@ -33,6 +34,7 @@ interface SignUpCreateAccountProps {
 const SignUpCreateAccountScreen: React.FC<SignUpCreateAccountProps> = ({
   navigation,
 }) => {
+  const resetNavigation = useResetNavigation();
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSignUp = useCallback(
@@ -54,7 +56,7 @@ const SignUpCreateAccountScreen: React.FC<SignUpCreateAccountProps> = ({
     <SignUpCreateAccountView
       onSubmit={onSignUp}
       loading={loading}
-      onSignIn={() => resetNavigation(navigation, SignInRoute)}
+      onSignIn={() => resetNavigation(SignInRoute)}
     />
   );
 };

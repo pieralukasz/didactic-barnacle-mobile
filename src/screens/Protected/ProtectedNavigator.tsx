@@ -7,7 +7,7 @@ import {
 } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
-import Header from "@components/Header/Header";
+import Header from "@components/Header";
 
 import useUserContext from "@features/User/useUserContext";
 
@@ -15,7 +15,7 @@ import { MainNavigatorParams } from "@screens/MainNavigatorParams";
 import { testProtectedRoute } from "@screens/Protected/routes";
 import { ProtectedRoute, UnprotectedRoute } from "@screens/routes";
 
-import resetNavigation from "@utils/navigation/resetNavigation";
+import useResetNavigation from "@hooks/useResetNavigation";
 
 import { ProtectedNavigatorParams } from "./ProtectedNavigatorParams";
 
@@ -39,13 +39,14 @@ interface ProtectedNavigatorProps {
 const ProtectedNavigator: React.FC<ProtectedNavigatorProps> = ({
   navigation,
 }) => {
+  const resetNavigation = useResetNavigation();
   const { user } = useUserContext();
 
   useEffect(() => {
     if (user === null) {
-      resetNavigation(navigation, UnprotectedRoute);
+      resetNavigation(UnprotectedRoute);
     }
-  }, [navigation, user]);
+  }, [navigation, resetNavigation, user]);
 
   return (
     <Stack.Navigator

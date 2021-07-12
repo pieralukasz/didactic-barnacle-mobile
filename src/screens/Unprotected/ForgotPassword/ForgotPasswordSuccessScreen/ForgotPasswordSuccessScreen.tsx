@@ -7,8 +7,9 @@ import { ForgotPasswordSuccessRoute } from "@screens/Unprotected/ForgotPassword/
 import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
 import { ForgotPasswordRoute, SignInRoute } from "@screens/Unprotected/routes";
 
-import resetNavigation from "@utils/navigation/resetNavigation";
 import SuccessScreen from "@screens/Common/SuccessScreen";
+
+import useResetNavigation from "@hooks/useResetNavigation";
 
 type ForgotPasswordSuccessNavigationProp = CompositeNavigationProp<
   StackNavigationProp<ForgotPasswordParams, typeof ForgotPasswordSuccessRoute>,
@@ -25,19 +26,20 @@ interface ForgotPasswordSuccessProps {
   route: ForgotPasswordSuccessRouteProp;
 }
 
-const ForgotPasswordSuccessScreen: React.FC<ForgotPasswordSuccessProps> = ({
-  navigation,
-}) => {
-  return (
-    <SuccessScreen
-      submitButton={{
-        text: "Go to sign in",
-        dataTestId: "sign-in-button",
-        onSubmit: () => resetNavigation(navigation, SignInRoute),
-      }}
-      title="Your password has been changed"
-    />
-  );
-};
+const ForgotPasswordSuccessScreen: React.FC<ForgotPasswordSuccessProps> =
+  () => {
+    const resetNavigation = useResetNavigation();
+
+    return (
+      <SuccessScreen
+        submitButton={{
+          text: "Go to sign in",
+          dataTestId: "sign-in-button",
+          onSubmit: () => resetNavigation(SignInRoute),
+        }}
+        title="Your password has been changed"
+      />
+    );
+  };
 
 export default ForgotPasswordSuccessScreen;
