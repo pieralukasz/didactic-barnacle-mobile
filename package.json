@@ -102,6 +102,9 @@
       "json",
       "node"
     ],
+    "modulePathIgnorePatterns": [
+      "detox"
+    ],
     "resetMocks": false,
     "moduleNameMapper": {
       "@assets/(.*)": "<rootDir>/src/assets/$1",

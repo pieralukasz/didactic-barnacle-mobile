@@ -1,15 +1,15 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
 
-import ScreenLayout from "@layouts/ScreenLayout";
-import Button from "@components/Button";
+import { Button, Text } from "react-native-paper";
 
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import CommonViewProps from "@interfaces/CommonViewProps";
-import ForgotPasswordVerificationFormState from "./ForgotPasswordVerificationForm/ForgotPasswordVerificationFormState";
-import styles from "./styles";
+import ScreenLayout from "@layouts/ScreenLayout";
 
 import ForgotPasswordVerificationForm from "./ForgotPasswordVerificationForm";
+import ForgotPasswordVerificationFormState from "./ForgotPasswordVerificationForm/ForgotPasswordVerificationFormState";
+import styles from "./styles";
 
 interface ForgotPasswordVerificationCodeViewProps
   extends CommonViewProps<ForgotPasswordVerificationFormState> {
@@ -34,8 +34,8 @@ const ForgotPasswordVerificationView: React.FC<ForgotPasswordVerificationCodeVie
         </View>
         <ForgotPasswordVerificationForm onSubmit={onSubmit} />
         <Button
-          type="secondary"
-          dataTestId="forgot-password-resent-button"
+          {...attachAccessibilityID("orgot-password-resent-button")}
+          mode="outlined"
           onPress={onResentCode}
           style={styles.resendButton}>
           Resent verification code

@@ -1,9 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 
+import { Button } from "react-native-paper";
+
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import FormButton from "@interfaces/FormButton";
-import styles from "@components/Form/styles";
-import Button from "@components/Button";
+
+import styles from "./styles";
 
 interface FormProps {
   submitButton: FormButton;
@@ -17,7 +20,8 @@ const Form: React.FC<FormProps> = ({
     <View>
       {children}
       <Button
-        dataTestId={dataTestId ?? "submit-button"}
+        {...attachAccessibilityID(dataTestId ?? "submit-button")}
+        mode="contained"
         disabled={disabled}
         style={styles.submitButton}
         onPress={onSubmit}>

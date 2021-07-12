@@ -1,14 +1,14 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
-import ScreenLayout from "@layouts/ScreenLayout";
-import CommonViewProps from "@interfaces/CommonViewProps";
 
-import Button from "@components/Button";
+import { Button, Text } from "react-native-paper";
+
+import attachAccessibilityID from "@utils/attachAccessibilityID";
+import CommonViewProps from "@interfaces/CommonViewProps";
+import ScreenLayout from "@layouts/ScreenLayout";
 
 import SignUpVerificationForm from "./SignUpVerificationForm";
 import SignUpVerificationFormState from "./SignUpVerificationForm/SignUpVerificationFormState";
-
 import styles from "./styles";
 
 interface SignUpVerificationViewProps
@@ -38,11 +38,11 @@ const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
       </View>
       <SignUpVerificationForm onSubmit={onSubmit} />
       <Button
-        type="secondary"
-        dataTestId="sign-up-resent-button"
+        {...attachAccessibilityID("sign-up-resend-button")}
+        mode="outlined"
         onPress={onResentCode}
         style={styles.resendButton}>
-        Resent verification code
+        Resend verification code
       </Button>
     </ScreenLayout>
   );

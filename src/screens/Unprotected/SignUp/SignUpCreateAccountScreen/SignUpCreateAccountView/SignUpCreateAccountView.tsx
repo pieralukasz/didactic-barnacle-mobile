@@ -1,15 +1,14 @@
 import React from "react";
-import { Text } from "react-native-paper";
 import { View } from "react-native";
 
-import ScreenLayout from "@layouts/ScreenLayout";
-import Button from "@components/Button";
+import { Button, Text } from "react-native-paper";
 
-import SignUpCreateAccountFormState from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen/SignUpCreateAccountView/SignUpCreateAccountForm/SignUpCreateAccountFormState";
-import SignUpCreateAccountForm from "@screens/Unprotected/SignUp/SignUpCreateAccountScreen/SignUpCreateAccountView/SignUpCreateAccountForm";
-
+import attachAccessibilityID from "@utils/attachAccessibilityID";
 import CommonViewProps from "@interfaces/CommonViewProps";
+import ScreenLayout from "@layouts/ScreenLayout";
 
+import SignUpCreateAccountForm from "./SignUpCreateAccountForm";
+import SignUpCreateAccountFormState from "./SignUpCreateAccountForm/SignUpCreateAccountFormState";
 import styles from "./styles";
 
 interface SignUpCreateAccountViewProps
@@ -27,7 +26,10 @@ const SignUpCreateAccountView: React.FC<SignUpCreateAccountViewProps> = ({
       <SignUpCreateAccountForm onSubmit={onSubmit} />
       <View style={styles.signIn}>
         <Text style={styles.signInText}>Already have an account?</Text>
-        <Button type="secondary" dataTestId="sign-in-button" onPress={onSignIn}>
+        <Button
+          {...attachAccessibilityID("sign-in-button")}
+          mode="outlined"
+          onPress={onSignIn}>
           Sign in
         </Button>
       </View>
