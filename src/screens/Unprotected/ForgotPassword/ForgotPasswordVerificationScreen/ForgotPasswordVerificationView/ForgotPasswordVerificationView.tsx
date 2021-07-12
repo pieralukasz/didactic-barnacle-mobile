@@ -14,11 +14,11 @@ import styles from "./styles";
 interface ForgotPasswordVerificationCodeViewProps
   extends CommonViewProps<ForgotPasswordVerificationFormState> {
   phoneNumber: string;
-  onResentCode: () => void;
+  onResendCode: () => void;
 }
 
 const ForgotPasswordVerificationView: React.FC<ForgotPasswordVerificationCodeViewProps> =
-  ({ onSubmit, phoneNumber, onResentCode, loading }) => {
+  ({ onSubmit, phoneNumber, onResendCode, loading }) => {
     return (
       <ScreenLayout title="Enter the verification code" loading={loading}>
         <View style={styles.textContainer}>
@@ -34,11 +34,11 @@ const ForgotPasswordVerificationView: React.FC<ForgotPasswordVerificationCodeVie
         </View>
         <ForgotPasswordVerificationForm onSubmit={onSubmit} />
         <Button
-          {...attachAccessibilityID("orgot-password-resent-button")}
+          {...attachAccessibilityID("forgot-password-resend-button")}
           mode="outlined"
-          onPress={onResentCode}
+          onPress={onResendCode}
           style={styles.resendButton}>
-          Resent verification code
+          Resend verification code
         </Button>
       </ScreenLayout>
     );

@@ -14,14 +14,14 @@ import styles from "./styles";
 interface SignUpVerificationViewProps
   extends CommonViewProps<SignUpVerificationFormState> {
   phoneNumber: string | number;
-  onResentCode: () => void;
+  onResendCode: () => void;
 }
 
 const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
   onSubmit,
   loading,
   phoneNumber,
-  onResentCode,
+  onResendCode,
 }) => {
   return (
     <ScreenLayout title="Enter verification code" loading={loading}>
@@ -40,7 +40,7 @@ const SignUpVerificationView: React.FC<SignUpVerificationViewProps> = ({
       <Button
         {...attachAccessibilityID("sign-up-resend-button")}
         mode="outlined"
-        onPress={onResentCode}
+        onPress={onResendCode}
         style={styles.resendButton}>
         Resend verification code
       </Button>
