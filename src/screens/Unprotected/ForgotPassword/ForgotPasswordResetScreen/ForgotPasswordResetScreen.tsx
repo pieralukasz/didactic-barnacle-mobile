@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import { View } from "react-native";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { ForgotPasswordParams } from "@screens/Unprotected/ForgotPassword/ForgotPasswordParams";
@@ -9,7 +8,6 @@ import {
 } from "@screens/Unprotected/ForgotPassword/routes";
 import { UnprotectedNavigatorParams } from "@screens/Unprotected/UnprotectedNavigatorParams";
 import { ForgotPasswordRoute } from "@screens/Unprotected/routes";
-import { Text } from "react-native-paper";
 import ForgotPasswordResetView from "@screens/Unprotected/ForgotPassword/ForgotPasswordResetScreen/ForgotPasswordResetView";
 import resetNavigation from "@utils/navigation/resetNavigation";
 
